@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ตารางนัดวัคซีนลูกน้อย</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0f766e;--teal2:#14b8a6;--sky:#e0f2fe;--peach:#fff1e6;--pink:#fce7f3;--sun:#fbbf24;--ink:#1f2937;--mu:#64748b;--card:#ffffffee}
+*{box-sizing:border-box}
+html,body{margin:0;font-family:'Sarabun',sans-serif;color:var(--ink);font-size:16px;line-height:1.55}
+body{min-height:100vh;background:linear-gradient(180deg,#bae6fd 0%,#e0f2fe 28%,#fdf2f8 62%,#fff7ed 100%);background-attachment:fixed;overflow-x:hidden}
+h1,h2,h3{font-family:'Mitr',sans-serif;font-weight:500;margin:0}
+.deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.deco svg{position:absolute}
+.float{animation:fl 9s ease-in-out infinite}
+.float2{animation:fl 12s ease-in-out infinite reverse}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:18px 14px 40px}
+.hero{text-align:center;padding:10px 6px 4px}
+.hero svg.ill{width:210px;max-width:62vw;height:auto;filter:drop-shadow(0 10px 18px rgba(15,118,110,.18))}
+.hero h1{font-size:27px;color:#0c4a6e;line-height:1.25;margin-top:6px}
+.hero p{margin:6px auto 0;max-width:520px;color:#334155}
+.badge{display:inline-flex;align-items:center;gap:6px;background:#ffffffcc;border:1px solid #bae6fd;color:#0369a1;border-radius:999px;padding:4px 12px;font-size:13px;margin-top:10px}
+.card{background:var(--card);backdrop-filter:blur(6px);border-radius:22px;padding:18px;margin-top:16px;box-shadow:0 10px 30px rgba(14,116,144,.12);border:1px solid #ffffff}
+.card h2{font-size:20px;color:var(--teal);display:flex;align-items:center;gap:8px}
+.ico{width:34px;height:34px;flex:none}
+.dob{display:grid;grid-template-columns:1fr 1.4fr 1.2fr;gap:8px;margin-top:12px}
+select{width:100%;font:inherit;font-size:17px;padding:12px 10px;border-radius:14px;border:2px solid #cbd5e1;background:#fff;color:var(--ink)}
+select:focus{outline:none;border-color:var(--teal2);box-shadow:0 0 0 4px #ccfbf1}
+.btn{display:block;width:100%;margin-top:12px;border:0;border-radius:16px;padding:14px;font-family:'Mitr',sans-serif;font-size:18px;color:#fff;cursor:pointer;background:linear-gradient(135deg,#0d9488,#0ea5e9);box-shadow:0 8px 18px rgba(13,148,136,.3)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#fff;color:var(--teal);border:2px solid #99f6e4;box-shadow:none;font-size:15px;padding:10px}
+.pdpa{font-size:12.5px;color:var(--mu);margin-top:10px;display:flex;gap:6px;align-items:flex-start}
+.err{color:#b91c1c;margin-top:8px;font-weight:600}
+.next{background:linear-gradient(135deg,#0f766e,#0891b2);color:#fff;border-radius:22px;padding:18px;margin-top:16px;position:relative;overflow:hidden;box-shadow:0 12px 28px rgba(8,145,178,.3)}
+.next .k{opacity:.9;font-size:14px}
+.next .d{font-family:'Mitr',sans-serif;font-size:26px;line-height:1.2;margin:4px 0}
+.next .cd{display:inline-block;background:#ffffff26;border-radius:999px;padding:3px 12px;font-size:14px;margin-top:4px}
+.next .v{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.next .v span{background:#fff;color:var(--teal);border-radius:999px;padding:3px 10px;font-size:13.5px;font-weight:600}
+.next .pl{margin-top:10px;font-size:14px;opacity:.95}
+.next svg.sp{position:absolute;right:-10px;bottom:-14px;width:120px;opacity:.18}
+.age{font-size:15px;color:#0c4a6e;margin-top:14px;text-align:center}
+.tl{position:relative;margin-top:6px;padding-left:26px}
+.tl:before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:3px;border-radius:3px;background:linear-gradient(#5eead4,#f9a8d4)}
+.st{position:relative;background:#fff;border-radius:18px;padding:14px 14px 12px;margin:12px 0;box-shadow:0 4px 14px rgba(2,132,199,.08);border:1px solid #e0f2fe}
+.st:before{content:'';position:absolute;left:-22px;top:18px;width:15px;height:15px;border-radius:50%;background:#fff;border:4px solid #5eead4}
+.st.past{opacity:.72}
+.st.past:before{border-color:#cbd5e1}
+.st.now{border:2px solid #14b8a6;box-shadow:0 8px 22px rgba(20,184,166,.25)}
+.st.now:before{border-color:#f59e0b;background:#fde68a}
+.st .h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.st .a{font-family:'Mitr',sans-serif;font-size:18px;color:#0f766e}
+.chip{font-size:12px;border-radius:999px;padding:2px 9px;font-weight:700}
+.c-past{background:#f1f5f9;color:#475569}.c-now{background:#fef3c7;color:#b45309}.c-fut{background:#e0f2fe;color:#0369a1}
+.st .dt{color:#334155;font-size:15px;margin-top:2px}
+.vx{display:flex;gap:10px;align-items:flex-start;margin-top:10px;padding-top:10px;border-top:1px dashed #e2e8f0}
+.vx .i{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.vx .i svg{width:24px;height:24px}
+.vx b{display:block;font-size:15.5px}
+.vx small{color:var(--mu);font-size:13.5px}
+.vx .se{display:block;color:#7c2d12;background:#fff7ed;border-radius:10px;padding:4px 8px;margin-top:4px;font-size:13px}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-top:12px;padding-bottom:4px}
+.tabs button{flex:none;border:2px solid #e2e8f0;background:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-size:14.5px;cursor:pointer;color:#334155}
+.tabs button.on{background:#0f766e;border-color:#0f766e;color:#fff}
+.tip{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #e2e8f0}
+.tip:last-child{border-bottom:0}
+.tip .e{font-size:26px;line-height:1;flex:none;width:40px;height:40px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.sev{background:#fef2f2;border:2px solid #fecaca;border-radius:16px;padding:12px;margin-top:10px}
+.sev h3{color:#b91c1c;font-size:17px}
+.call{display:inline-flex;align-items:center;gap:6px;background:#dc2626;color:#fff;text-decoration:none;border-radius:999px;padding:8px 16px;font-family:'Mitr',sans-serif;margin-top:8px}
+.ref{font-size:12.5px;color:var(--mu)}
+.ref a{color:#0369a1}
+.foot{text-align:center;font-size:13px;color:var(--mu);margin-top:18px}
+.row2{display:flex;gap:8px;margin-top:10px}
+.row2 .btn{margin-top:0}
+.hidden{display:none!important}
+@media print{.deco,.noprint,.tabs{display:none!important} body{background:#fff} .card,.st,.next{box-shadow:none} .next{color:#000;background:#fff;border:2px solid #000} .next .v span{border:1px solid #000}}
+
+/* ===== แบบบันทึกสุขภาพเด็กแรกเกิด–5 ปี (พิมพ์ A4) ===== */
+#bk{display:none}
+.btn.staff{background:#fff;color:#0f766e;border:2px dashed #14b8a6;box-shadow:none;font-size:16px}
+@media print{
+  @page{size:A4 portrait;margin:8mm}
+  body.print-bk{background:#fff!important}
+  body.print-bk>*:not(#bk){display:none!important}
+  body.print-bk #bk{display:block}
+}
+#bk{font-family:'Sarabun',sans-serif;color:#000;font-size:12px;line-height:1.3}
+#bk .bk-t{text-align:center;font-size:18px;font-weight:700;margin:0 0 6px;position:relative}
+#bk .bk-t .bk-hn{position:absolute;right:0;top:3px;font-size:12.5px;font-weight:400}
+#bk .bk-ln{display:flex;flex-wrap:wrap;gap:2px 10px;margin:5px 0;white-space:nowrap}
+#bk .bk-ln b{display:inline-block;border-bottom:1px dotted #000;text-align:center;font-weight:700;padding:0 4px}
+#bk u.bk-u{display:inline-block;height:1.05em;vertical-align:bottom;border-bottom:1px dotted #000;text-decoration:none;width:var(--w,90px)}
+#bk .bk-cols{display:flex;margin-top:6px;border:1.5px solid #000}
+#bk table{border-collapse:collapse;width:100%;table-layout:fixed}
+#bk th,#bk td{border:1px solid #000;padding:2px 3px;vertical-align:middle;overflow:hidden}
+#bk th{font-weight:700;font-size:11px;background:#f3f4f6;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#bk .bk-c1{width:43%} #bk .bk-c2{width:21%;border-left:1.5px solid #000;border-right:1.5px solid #000} #bk .bk-c3{width:36%}
+#bk .bk-c1,#bk .bk-c2,#bk .bk-c3{display:flex;flex-direction:column}
+#bk .bk-sec{font-weight:700;text-align:center;padding:3px;border-bottom:1px solid #000;background:#f3f4f6;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#bk .bk-sec.tp{border-top:1px solid #000}
+#bk .bk-d{text-align:center;font-weight:700;white-space:nowrap}
+#bk .bk-a{text-align:center}
+#bk .bk-nt{font-size:9.5px;font-weight:400}
+#bk tr.bk-vr td{height:25.5px}
+#bk .bk-c2 td{height:24px}
+#bk .bk-c3 td{height:24.4px}
+#bk .bk-ft{margin-top:8px;display:flex;justify-content:space-between;gap:10px}
+#bk .bk-src{font-size:9.5px;color:#333;margin-top:5px}
+</style>
+</head>
+<body>
+<!-- ภาพตกแต่งพื้นหลัง (วาดด้วย SVG) -->
+<div class="deco" aria-hidden="true">
+  <svg class="float" style="top:40px;left:-30px;width:190px" viewBox="0 0 200 90"><g fill="#fff" opacity=".9"><ellipse cx="60" cy="55" rx="55" ry="30"/><ellipse cx="110" cy="45" rx="45" ry="35"/><ellipse cx="150" cy="60" rx="45" ry="25"/></g></svg>
+  <svg class="float2" style="top:150px;right:-40px;width:230px" viewBox="0 0 200 90"><g fill="#fff" opacity=".85"><ellipse cx="60" cy="55" rx="55" ry="30"/><ellipse cx="110" cy="45" rx="45" ry="35"/><ellipse cx="150" cy="60" rx="45" ry="25"/></g></svg>
+  <svg class="float" style="top:520px;left:-50px;width:170px" viewBox="0 0 200 90"><g fill="#fff" opacity=".7"><ellipse cx="60" cy="55" rx="55" ry="30"/><ellipse cx="110" cy="45" rx="45" ry="35"/><ellipse cx="150" cy="60" rx="45" ry="25"/></g></svg>
+  <svg class="float2" style="top:22px;right:12%;width:70px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="22" fill="#fde68a"/><g stroke="#fbbf24" stroke-width="6" stroke-linecap="round"><path d="M50 8v12M50 80v12M8 50h12M80 50h12M20 20l8 8M72 72l8 8M80 20l-8 8M28 72l-8 8"/></g></svg>
+  <svg class="float" style="top:330px;left:6%;width:26px" viewBox="0 0 24 24"><path fill="#f9a8d4" d="M12 2l2.6 6.9L22 9.3l-5.6 4.6L18.2 21 12 17.2 5.8 21l1.8-7.1L2 9.3l7.4-.4z"/></svg>
+  <svg class="float2" style="top:420px;right:7%;width:22px" viewBox="0 0 24 24"><path fill="#5eead4" d="M12 2l2.6 6.9L22 9.3l-5.6 4.6L18.2 21 12 17.2 5.8 21l1.8-7.1L2 9.3l7.4-.4z"/></svg>
+  <svg class="float" style="bottom:120px;right:4%;width:60px" viewBox="0 0 60 110"><path d="M30 70 Q28 90 34 108" stroke="#94a3b8" stroke-width="2" fill="none"/><ellipse cx="30" cy="36" rx="24" ry="30" fill="#fda4af"/><path d="M24 64 h12 l-6 8z" fill="#fb7185"/></svg>
+  <svg class="float2" style="bottom:200px;left:3%;width:46px" viewBox="0 0 60 110"><path d="M30 70 Q32 90 26 108" stroke="#94a3b8" stroke-width="2" fill="none"/><ellipse cx="30" cy="36" rx="24" ry="30" fill="#7dd3fc"/><path d="M24 64 h12 l-6 8z" fill="#38bdf8"/></svg>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <!-- ภาพประกอบ: โล่ปกป้องลูกน้อย -->
+    <svg class="ill" viewBox="0 0 240 200" role="img" aria-label="ภาพประกอบเด็กยิ้มในโล่ป้องกันโรค">
+      <defs><linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs>
+      <circle cx="120" cy="104" r="92" fill="#ffffff" opacity=".55"/>
+      <path d="M120 20 L188 44 V104 C188 146 158 174 120 188 C82 174 52 146 52 104 V44 Z" fill="url(#sh)"/>
+      <path d="M120 34 L176 54 V104 C176 138 152 162 120 174 C88 162 64 138 64 104 V54 Z" fill="#fff" opacity=".25"/>
+      <circle cx="120" cy="104" r="40" fill="#ffe4d1"/>
+      <path d="M86 92 C88 64 152 64 154 92 C146 78 134 74 120 76 C106 74 94 78 86 92Z" fill="#7c4a2d"/>
+      <circle cx="106" cy="104" r="4.5" fill="#1f2937"/><circle cx="134" cy="104" r="4.5" fill="#1f2937"/>
+      <circle cx="99" cy="116" r="6" fill="#fda4af" opacity=".7"/><circle cx="141" cy="116" r="6" fill="#fda4af" opacity=".7"/>
+      <path d="M110 120 Q120 130 130 120" stroke="#1f2937" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <g transform="translate(176 132) rotate(35)"><rect x="-6" y="-30" width="12" height="44" rx="4" fill="#fff" stroke="#0f766e" stroke-width="3"/><rect x="-6" y="-14" width="12" height="12" fill="#99f6e4"/><path d="M0 14 v14" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/><path d="M-10 -30 h20" stroke="#0f766e" stroke-width="4" stroke-linecap="round"/><path d="M0 -30 v-10" stroke="#0f766e" stroke-width="3"/></g>
+      <path d="M56 52 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z" fill="#fbbf24"/>
+      <path d="M196 30 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z" fill="#f9a8d4"/>
+      <path d="M40 140 c0-6 8-6 8 0 c0-6 8-6 8 0 c0 6-8 10-8 12 c0-2-8-6-8-12z" fill="#fb7185"/>
+    </svg>
+    <h1>ตารางนัดวัคซีนลูกน้อย</h1>
+    <p>ใส่วันเกิดของลูก แล้วดูวันนัดฉีดวัคซีนตามมาตรฐานกรมควบคุมโรค ตั้งแต่อายุ 2 เดือนถึง 4 ปี</p>
+    <div class="badge" id="facBadge">🏥 กำลังโหลด…</div>
+  </header>
+
+  <section class="card noprint" id="formCard">
+    <h2><svg class="ico" viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="32" rx="7" fill="#ccfbf1"/><rect x="6" y="10" width="36" height="10" rx="5" fill="#14b8a6"/><path d="M15 6v8M33 6v8" stroke="#0f766e" stroke-width="4" stroke-linecap="round"/><circle cx="18" cy="29" r="3" fill="#0f766e"/><circle cx="30" cy="29" r="3" fill="#f59e0b"/><circle cx="18" cy="36" r="3" fill="#0f766e"/></svg>วันเกิดของลูก</h2>
+    <div class="dob">
+      <select id="dD" aria-label="วัน"><option value="">วัน</option></select>
+      <select id="dM" aria-label="เดือน"><option value="">เดือน</option></select>
+      <select id="dY" aria-label="ปี พ.ศ."><option value="">ปี พ.ศ.</option></select>
+    </div>
+    <button class="btn" id="go">ดูตารางนัดวัคซีน 💉</button>
+    <div class="err" id="err"></div>
+    <div class="pdpa">🔒 <span>ระบบใช้วันเกิดเพื่อคำนวณวันนัดเท่านั้น <b>ไม่บันทึก ไม่ถามชื่อ</b> และไม่เก็บข้อมูลใด ๆ ของลูก</span></div>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="next" id="nextBox"></div>
+    <div class="age" id="ageText"></div>
+    <div class="card">
+      <h2><svg class="ico" viewBox="0 0 48 48"><path d="M24 4 L40 10 V24 C40 34 33 41 24 44 C15 41 8 34 8 24 V10Z" fill="#99f6e4"/><path d="M17 24 l5 5 9-10" stroke="#0f766e" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ตารางวัคซีนตามช่วงอายุ</h2>
+      <div class="ref" style="margin-top:4px">นัดฉีดทุกวันที่ <b id="apDay">20</b> ของเดือน ถ้าตรงวันหยุดจะเลื่อนเป็นวันทำการถัดไป และลูกต้องมีอายุครบตามเกณฑ์ในวันนัด</div>
+      <div class="tl" id="timeline"></div>
+      <div class="row2 noprint">
+        <button class="btn ghost" id="ics">📅 บันทึกลงปฏิทินมือถือ</button>
+        <button class="btn ghost" id="prt">🖨 พิมพ์ / บันทึกภาพ</button>
+      </div>
+      <button class="btn staff noprint" id="prtBk">🗂 พิมพ์แบบบันทึกสุขภาพเด็กแรกเกิด–5 ปี (A4) — สำหรับเจ้าหน้าที่</button>
+      <button class="btn ghost noprint" id="again" style="margin-top:8px">↺ ดูของลูกอีกคน</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><svg class="ico" viewBox="0 0 48 48"><path d="M8 10 h14 a4 4 0 0 1 4 4 v28 a4 4 0 0 0-4-4 H8z" fill="#bae6fd"/><path d="M40 10 h-14 a4 4 0 0 0-4 4 v28 a4 4 0 0 1 4-4 h14z" fill="#fbcfe8"/><path d="M12 18h8M12 24h8M28 18h8M28 24h8" stroke="#0369a1" stroke-width="2.5" stroke-linecap="round"/></svg>ความรู้สำหรับผู้ปกครอง</h2>
+    <div class="tabs noprint" id="kTabs">
+      <button data-t="before" class="on">🎒 ก่อนฉีด</button>
+      <button data-t="after">🏠 หลังฉีด</button>
+      <button data-t="se">🌡️ อาการข้างเคียง</button>
+      <button data-t="sos">🚑 อาการที่ต้องรีบไป รพ.</button>
+    </div>
+    <div id="kBody"></div>
+    <div class="ref" style="margin-top:12px"><b>แหล่งอ้างอิง</b> (กองโรคติดต่อทั่วไป กรมควบคุมโรค กระทรวงสาธารณสุข):
+      <a href="https://ddc.moph.go.th/uploads/publish/1660220250103030656.pdf" target="_blank" rel="noopener">มาตรฐานการดำเนินงานสร้างเสริมภูมิคุ้มกันโรค 2568</a> ·
+      <a href="https://ddc.moph.go.th/uploads/publish/1383020230208094008.pdf" target="_blank" rel="noopener">วัคซีน DTwP-HB-Hib</a> ·
+      <a href="https://ddc.moph.go.th/uploads/publish/1382820230208093802.pdf" target="_blank" rel="noopener">วัคซีนโปลิโอ</a> ·
+      <a href="https://ddc.moph.go.th/uploads/publish/1382920230208093839.pdf" target="_blank" rel="noopener">วัคซีน MMR</a> ·
+      <a href="https://ddc.moph.go.th/uploads/publish/1383220230208094205.pdf" target="_blank" rel="noopener">วัคซีนไข้สมองอักเสบเจอี</a> ·
+      <a href="https://ddc.moph.go.th/uploads/publish/1457520230817093520.pdf" target="_blank" rel="noopener">ข้อควรปฏิบัติหลังรับวัคซีน</a> ·
+      <a href="https://ddc.moph.go.th/uploads/publish/1383320230208094239.pdf" target="_blank" rel="noopener">วัคซีนโรต้า</a> ·
+      <a href="https://www.thaipbs.or.th/news/content/572287" target="_blank" rel="noopener">วัคซีน PCV (สธ. พ.ย. 2569)</a>
+    </div>
+  </section>
+
+  <div class="foot" id="foot">ข้อมูลนี้เป็นตารางตามมาตรฐาน วันนัดจริงให้ยึดตามที่เจ้าหน้าที่นัดในสมุดบันทึกสุขภาพแม่และเด็ก (สมุดสีชมพู)<br>🔒 หน้านี้คำนวณในเครื่องของท่านทั้งหมด ไม่ส่งและไม่เก็บข้อมูลใด ๆ • วันหยุดราชการถึงปี 2570</div>
+</div>
+
+<script>
+
+/* =====================================================================
+ *  ตารางนัดวัคซีนลูกน้อย — ฉบับเผยแพร่ (ทำงานในเบราว์เซอร์ทั้งหมด ไม่ส่ง/ไม่เก็บข้อมูลใด ๆ)
+ *  ★ แก้ค่าของหน่วยบริการได้ในส่วนนี้ส่วนเดียว ★
+ * ===================================================================== */
+var VX_CONFIG = {
+  FACILITY_NAME: 'รพ.สต.บ้านหนองแวง',                 // ชื่อหน่วยบริการ (แสดงบนหน้าเว็บและแบบบันทึก)
+  FACILITY_PHONE: '',                                // เบอร์โทรหน่วยบริการ (ว่างได้)
+  APPT_PLACE: 'รพ.สต.บ้านหนองแวง ต.หนองแวง อ.นิคมคำสร้อย จ.มุกดาหาร',                    // สถานที่ฉีด
+  APPT_TIME: '',                     // เวลาให้บริการวัคซีน
+  APPT_DAY_OF_MONTH: '10',                           // นัดฉีดวัคซีนทุกวันที่ … ของเดือน
+  OFF_WEEKDAYS: '0,6',                               // วันปิดทำการ 0 = อาทิตย์ … 6 = เสาร์
+  ROTA_DEFAULT_DOSES: '3',                           // Rota ที่ใช้: 3 = Rotasiil (2-4-6 เดือน) / 2 = Rotarix
+  ROTA_3DOSE_FROM: '2025-10-01',                     // วันเริ่มใช้ Rota ชนิด 3 ครั้ง (ค.ศ.)
+  PCV_BORN_FROM: '2025-10-01',                       // PCV: สิทธิ สปสช. เด็กที่เกิดตั้งแต่ (ค.ศ.)
+  PCV_START: '2026-10-01'                            // PCV: วันเริ่มให้บริการ (ค.ศ.)
+};
+/* วันหยุดราชการ (ค.ศ. yyyy-mm-dd) — เฉพาะวันจันทร์–ศุกร์ • อัปเดตทุกปีเมื่อ ครม. ประกาศ
+ * ปีที่ไม่มีในรายการ ระบบใช้วันหยุดวันที่คงที่ (ปีใหม่ จักรี สงกรานต์ ฯลฯ) ให้อัตโนมัติ แต่ไม่รวมวันหยุดทางพุทธศาสนา */
+var VX_HOLIDAYS = {
+  2026: ['2026-01-01','2026-01-02','2026-03-03','2026-04-06','2026-04-13','2026-04-14','2026-04-15','2026-05-04','2026-05-11',
+         '2026-06-01','2026-06-03','2026-07-28','2026-07-29','2026-07-30','2026-08-12','2026-10-13','2026-10-23','2026-12-07','2026-12-10','2026-12-31'],
+  2027: ['2027-01-01','2027-02-22','2027-04-06','2027-04-13','2027-04-14','2027-04-15','2027-05-04','2027-05-20','2027-06-03',
+         '2027-07-19','2027-07-20','2027-07-28','2027-08-12','2027-10-13','2027-10-25','2027-12-06','2027-12-10','2027-12-31']
+};
+
+/* ---------- ค่าที่ระบบใช้ (ไม่ต้องแก้) ---------- */
+var TZ = 'Asia/Bangkok';
+var TH_MONTHS = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+var VX_HEADERS = ['ruleId', 'series', 'seriesName', 'doseNo', 'label', 'group', 'recAge', 'minAge', 'maxAge',
+    'minInterval', 'recInterval', 'condition', 'repeat', 'active', 'stdCode', 'note', 'stockProducts'];
+function settings_() {
+  var s = { FACILITY_NAME: '', APPT_MODE: 'MONTHLY', APPT_ELIGIBILITY: 'DUE', CLINIC_DAYS: '', GRACE_DAYS: '30', CO_ADMIN_DAYS: '30',
+    APPT_EXCLUDE_RULES: 'BCG,HB1' };
+  Object.keys(VX_CONFIG).forEach(function (k) { s[k] = String(VX_CONFIG[k]); });
+  return s;
+}
+var _rules = null;
+function rules_() {
+  return _rules || (_rules = DEFAULT_RULES.map(function (row) { var o = {}; VX_HEADERS.forEach(function (h, i) { o[h] = String(row[i] == null ? '' : row[i]); }); return o; }));
+}
+var _hol = null;
+function holidays_() {
+  if (_hol) return _hol;
+  var out = [], y0 = new Date().getFullYear() - 1, pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  for (var y = y0; y <= y0 + 8; y++) {
+    if (VX_HOLIDAYS[y]) { out = out.concat(VX_HOLIDAYS[y]); continue; }
+    // วันหยุดวันที่คงที่ ถ้าตรงเสาร์/อาทิตย์ หยุดชดเชยวันจันทร์
+    ['01-01', '04-06', '04-13', '04-14', '04-15', '05-04', '06-03', '07-28', '08-12', '10-13', '10-23', '12-05', '12-10', '12-31'].forEach(function (md) {
+      var d = new Date(y, +md.slice(0, 2) - 1, +md.slice(3)), w = d.getDay();
+      if (w === 6) d.setDate(d.getDate() + 2); else if (w === 0) d.setDate(d.getDate() + 1);
+      while (out.indexOf(d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate())) >= 0 || d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
+      out.push(d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()));
+    });
+  }
+  return (_hol = out);
+}
+function todayStr_() { var d = new Date(), p = function (n) { return (n < 10 ? '0' : '') + n; }; return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()); }
+function isYmd_(s) { return /^\d{4}-\d{2}-\d{2}$/.test(String(s || '')); }
+function thDate_(s) { var d = eParse_(s); return d ? d.getDate() + ' ' + TH_MONTHS[d.getMonth()] + ' ' + (d.getFullYear() + 543) : ''; }
+/**
+ * Engine.gs — ตัวคำนวณกำหนดนัดวัคซีน + นิยามคลังวัคซีน/แบบฟอร์ม ว.3/1 (Pure JavaScript ไม่เรียก Google API)
+ * ระบบนัดและบันทึกวัคซีน EPI — รพ.สต.บ้านคำสมิง  v2.0
+ *
+ *  - กติกาวัคซีนอยู่ในชีต VaccineRules (แก้ไขได้เมื่อกรมควบคุมโรคปรับตาราง)
+ *  - อายุ/ระยะห่างเขียนเป็นข้อความ "0d" "6w" "2m" "1y6m" (d=วัน w=สัปดาห์ m=เดือน y=ปี)
+ *  - recAge = อายุตามตาราง, minAge = อายุต่ำสุด, maxAge = ต้องฉีด "ก่อน" อายุนี้
+ *  - minInterval / recInterval = ระยะห่างจากเข็มก่อนหน้าในชุดเดียวกัน
+ *  - กลุ่ม PREG นับจาก LMP (อายุครรภ์)
+ *  - วันนัด (APPT_MODE=MONTHLY): วันที่ 20 ของทุกเดือน เลื่อนออกจาก ส-อา/วันหยุด
+ *    ถ้าวันนัดรอบนั้นอายุ/ระยะห่างยังไม่ครบ → รอบเดือนถัดไป
+ */
+
+var ENGINE_DAY_MS = 86400000;
+
+var GROUP_WINDOWS = {
+  CHILD:  { from: '0d',  to: '8y'  },
+  SCHOOL: { from: '4y',  to: '21y' },
+  ADULT:  { from: '15y', to: '200y' }
+};
+
+/** ตารางมาตรฐานเริ่มต้น
+ * ruleId, series, seriesName, doseNo, label, group, recAge, minAge, maxAge, minInterval, recInterval, condition, repeat, active, stdCode, note, stockProducts */
+var DEFAULT_RULES = [
+  ['BCG',  'BCG',  'วัณโรค (BCG)', 1, 'BCG', 'CHILD', '0d', '0d', '', '', '', '', '', 'Y', '', 'ภายใน 7 วันหลังคลอด / ป.1 ให้เฉพาะไม่มีประวัติและไม่มีแผลเป็น', 'BCG'],
+  ['HB1',  'HB',   'ตับอักเสบบี (HB)', 1, 'HB1', 'CHILD', '0d', '0d', '', '', '', '', '', 'Y', '', 'ภายใน 24 ชั่วโมงหลังคลอด', 'HB2'],
+  ['HB2',  'HB',   'ตับอักเสบบี (HB)', 2, 'HB2', 'CHILD', '1m', '4w', '', '4w', '', 'MOTHER_HBSAG_POS', '', 'Y', '', 'เฉพาะทารกที่มารดาเป็นพาหะไวรัสตับอักเสบบี', 'HB2'],
+  ['DTP1', 'DTP',  'คอตีบ-บาดทะยัก-ไอกรน(-ตับอักเสบบี-ฮิบ)', 1, 'DTP-HB-Hib1', 'CHILD', '2m', '6w', '7y', '', '', '', '', 'Y', '', '', 'DTPHBHIB10|DTPHBHIB1'],
+  ['DTP2', 'DTP',  'คอตีบ-บาดทะยัก-ไอกรน(-ตับอักเสบบี-ฮิบ)', 2, 'DTP-HB-Hib2', 'CHILD', '4m', '10w', '7y', '4w', '', '', '', 'Y', '', '', 'DTPHBHIB10|DTPHBHIB1'],
+  ['DTP3', 'DTP',  'คอตีบ-บาดทะยัก-ไอกรน(-ตับอักเสบบี-ฮิบ)', 3, 'DTP-HB-Hib3', 'CHILD', '6m', '14w', '7y', '4w', '', '', '', 'Y', '', '', 'DTPHBHIB10|DTPHBHIB1'],
+  ['DTP4', 'DTP',  'คอตีบ-บาดทะยัก-ไอกรน(-ตับอักเสบบี-ฮิบ)', 4, 'DTP4 (กระตุ้น)', 'CHILD', '18m', '12m', '7y', '6m', '', '', '', 'Y', '', '', 'DTP'],
+  ['DTP5', 'DTP',  'คอตีบ-บาดทะยัก-ไอกรน(-ตับอักเสบบี-ฮิบ)', 5, 'DTP5 (กระตุ้น)', 'CHILD', '4y', '4y', '7y', '6m', '', '', '', 'Y', '', 'ถ้าเกิน 7 ปี ใช้ dT แทน', 'DTP'],
+  ['IPV1', 'POLIO','โปลิโอ (IPV/OPV)', 1, 'IPV1', 'CHILD', '2m', '6w', '', '', '', '', '', 'Y', '', 'สูตร 2 IPV + 3 OPV', 'IPV'],
+  ['IPV2', 'POLIO','โปลิโอ (IPV/OPV)', 2, 'IPV2', 'CHILD', '4m', '10w', '', '4w', '', '', '', 'Y', '', '', 'IPV'],
+  ['OPV1', 'POLIO','โปลิโอ (IPV/OPV)', 3, 'OPV (6 เดือน)', 'CHILD', '6m', '14w', '', '4w', '', '', '', 'Y', '', 'ช่อง OPV3 ในสมุดบันทึกสุขภาพ', 'OPV'],
+  ['OPV2', 'POLIO','โปลิโอ (IPV/OPV)', 4, 'OPV (1 ปี 6 เดือน)', 'CHILD', '18m', '12m', '', '4w', '', '', '', 'Y', '', 'ช่อง OPV4 ในสมุดบันทึกสุขภาพ', 'OPV'],
+  ['OPV3', 'POLIO','โปลิโอ (IPV/OPV)', 5, 'OPV (4 ปี)', 'CHILD', '4y', '4y', '', '4w', '', '', '', 'Y', '', 'ช่อง OPV5 ในสมุดบันทึกสุขภาพ', 'OPV'],
+  ['ROTA1','ROTA', 'โรต้า (Rota)', 1, 'Rota1', 'CHILD', '2m', '6w', '15w1d', '', '', '', '', 'Y', '', 'เข็มแรกห้ามให้หลังอายุ 15 สัปดาห์', 'ROTA'],
+  ['ROTA2','ROTA', 'โรต้า (Rota)', 2, 'Rota2', 'CHILD', '4m', '10w', '32w1d', '4w', '', '', '', 'Y', '', 'ห้ามให้ครั้งสุดท้ายหลังอายุ 32 สัปดาห์', 'ROTA'],
+  ['ROTA3','ROTA', 'โรต้า (Rota)', 3, 'Rota3', 'CHILD', '6m', '14w', '32w1d', '4w', '', 'ROTA_3DOSE', '', 'Y', '', 'Rotasill ให้ 3 ครั้ง (R21-R23) / Rotarix 2 ครั้ง (R11-R12) = ครบ / R11 + Rotasill 2 ครั้ง = ครบ', 'ROTA'],
+  // PCV10 (Pneumosil) — คำนวณด้วย ePcvSeries_ ตามคู่มือ PCV สสจ.อุบลราชธานี 2569 (2p+1, catch-up ตามอายุที่เริ่ม) — ค่าในแถวนี้ใช้แสดงผลเท่านั้น
+  ['PCV1', 'PCV',  'นิวโมคอคคัส (PCV)', 1, 'PCV1', 'CHILD', '2m', '6w', '24m', '', '', '', '', 'Y', 'P11', 'สูตร 2p+1 (2-4-12 เดือน) • เริ่มก่อนอายุ 2 ปี • สิทธิ สปสช. เด็กเกิดตั้งแต่ 1 ต.ค. 2568', 'PCV5|PCV'],
+  ['PCV2', 'PCV',  'นิวโมคอคคัส (PCV)', 2, 'PCV2', 'CHILD', '4m', '10w', '', '4w', '8w', '', '', 'Y', 'P12', 'ห่างเข็ม 1 ≥ 4 สัปดาห์ (เริ่มอายุ ≥ 12 เดือน: ≥ 8 สัปดาห์)', 'PCV5|PCV'],
+  ['PCV3', 'PCV',  'นิวโมคอคคัส (PCV)', 3, 'PCV3 (กระตุ้น)', 'CHILD', '12m', '9m', '', '8w', '', '', '', 'Y', 'P14', 'เข็มกระตุ้นอายุ 12 เดือน ห่างเข็ม 2 ≥ 8 สัปดาห์ • ถ้าเริ่มเมื่ออายุ ≥ 12 เดือน ไม่ต้องให้', 'PCV5|PCV'],
+  ['MMR1', 'MMR',  'หัด-คางทูม-หัดเยอรมัน (MMR)', 1, 'MMR1', 'CHILD', '9m', '9m', '', '', '', '', '', 'Y', '', '', 'MMR'],
+  ['MMR2', 'MMR',  'หัด-คางทูม-หัดเยอรมัน (MMR)', 2, 'MMR2', 'CHILD', '18m', '12m', '', '4w', '', '', '', 'Y', '', '', 'MMR'],
+  ['LAJE1','LAJE', 'ไข้สมองอักเสบเจอี (LAJE)', 1, 'LAJE1', 'CHILD', '12m', '12m', '', '', '', '', '', 'Y', '', '', 'LAJE|JEK'],
+  ['LAJE2','LAJE', 'ไข้สมองอักเสบเจอี (LAJE)', 2, 'LAJE2', 'CHILD', '30m', '15m', '', '3m', '', '', '', 'Y', '', '', 'LAJE|JEK'],
+  ['HPV1', 'HPV',  'เอชพีวี (HPV)', 1, 'HPV (9 สายพันธุ์)', 'SCHOOL', '11y', '9y', '21y', '', '', 'FEMALE', '', 'Y', '', 'นักเรียนหญิง ป.5 / เก็บตกหญิง 11–20 ปี: 9vHPV 1 เข็ม', 'HPV'],
+  ['DT_P6','dT_SCHOOL','คอตีบ-บาดทะยัก นักเรียน (dT)', 1, 'dT ป.6', 'SCHOOL', '12y', '7y', '', '', '', '', '', 'Y', '', 'นักเรียน ป.6 ทุกคน', 'DT'],
+  ['DT_ADULT','dT_ADULT','คอตีบ-บาดทะยัก ผู้ใหญ่ (dT)', 1, 'dT กระตุ้นทุก 10 ปี', 'ADULT', '20y', '15y', '', '', '', 'AFTER:DTP|dT_SCHOOL|dT_ADULT', '10y', 'Y', '', 'ไม่มีประวัติ: dT 3 เข็ม 0, 1, 6 เดือน (Tdap แทน dT ได้)', 'DT'],
+  ['AP_PREG','AP_PREG','ไอกรน หญิงตั้งครรภ์ (aP/Tdap)', 1, 'aP ทุกการตั้งครรภ์', 'PREG', '20w', '16w', '38w', '', '', '', '', 'Y', '', 'GA 20–32 สัปดาห์ (เริ่มได้ 16 สัปดาห์) และก่อนคลอด ≥ 2 สัปดาห์', 'AP'],
+  ['FLU_PREG','FLU_PREG','ไข้หวัดใหญ่ หญิงตั้งครรภ์', 1, 'Influenza ทุกการตั้งครรภ์', 'PREG', '12w', '0d', '40w', '', '', '', '', 'Y', '', 'แนะนำ GA 12–20 สัปดาห์ ให้ได้ตลอดการตั้งครรภ์', 'FLU']
+];
+
+/** ผลิตภัณฑ์วัคซีนในคลัง (ตามขนาดบรรจุในแบบ ว.3/1) */
+var STOCK_PRODUCTS = [
+  { code: 'BCG',        name: 'BCG (10 doses)',            dpv: 10 },
+  { code: 'HB2',        name: 'HB (2 doses)',              dpv: 2 },
+  { code: 'DTPHBHIB10', name: 'DTP-HB-Hib (10 doses)',     dpv: 10 },
+  { code: 'DTPHBHIB1',  name: 'DTP-HB-Hib (1 dose)',       dpv: 1 },
+  { code: 'OPV',        name: 'OPV (20 doses)',            dpv: 20 },
+  { code: 'IPV',        name: 'IPV (1 dose)',              dpv: 1 },
+  { code: 'MMR',        name: 'MMR (1 dose)',              dpv: 1 },
+  { code: 'DTP',        name: 'DTP (10 doses)',            dpv: 10 },
+  { code: 'LAJE',       name: 'LAJE (1 dose)',             dpv: 1 },
+  { code: 'JEK',        name: 'JE เชื้อตาย (1 dose)',        dpv: 1 },
+  { code: 'ROTA',       name: 'Rota (1 dose)',             dpv: 1 },
+  { code: 'PCV5',       name: 'PCV10 Pneumosil (5 doses)', dpv: 5 },
+  { code: 'PCV',        name: 'PCV (1 dose)',              dpv: 1 },
+  { code: 'DT',         name: 'dT (10 doses)',             dpv: 10 },
+  { code: 'HPV',        name: 'HPV (1 dose)',              dpv: 1 },
+  { code: 'FLU',        name: 'Influenza (1 dose)',        dpv: 1 },
+  { code: 'AP',         name: 'aP (1 dose)',               dpv: 1 },
+  { code: 'MR',         name: 'MR (10 doses)',             dpv: 10 },
+  { code: 'HB1ML',      name: 'HB บุคลากร (1 dose = 1 ml)', dpv: 1 }
+];
+
+/** แถวของแบบฟอร์ม ว.3/1 (ปี 2569 ฉบับมี PCV 5 โดส) — row = เลขแถวใน Excel, seg = กลุ่มเป้าหมาย, factor = ตัวคูณอัตราสูญเสียในสูตรคอลัมน์ E
+ *  alt = ผลิตภัณฑ์อื่นที่ลงแถวเดียวกัน (แบบฟอร์มใหม่ไม่มีแถว DTP-HB-Hib 1 โดส) */
+var WV31_FORM = '2569-PCV5';
+var WV31_ROWS = [
+  { row: 12, seg: 'U5',    no: '1.',   label: 'HB (2 โดส)',              product: 'HB2',        dpv: 2,  factor: 1.11 },
+  { row: 13, seg: 'U5',    no: '2.',   label: 'BCG (10 โดส)',            product: 'BCG',        dpv: 10, factor: 2 },
+  { row: 14, seg: 'U5',    no: '3.',   label: 'DTP-HB-Hib (10 โดส)',     product: 'DTPHBHIB10', dpv: 10, factor: 1.33, alt: ['DTPHBHIB1'] },
+  { row: 15, seg: 'U5',    no: '4.',   label: 'IPV (1 โดส)',             product: 'IPV',        dpv: 1,  factor: 1.01 },
+  { row: 16, seg: 'U5',    no: '5.',   label: 'Rota (1 โดส)',            product: 'ROTA',       dpv: 1,  factor: 1.01 },
+  { row: 17, seg: 'U5',    no: '6.1',  label: 'PCV (5 โดส)',             product: 'PCV5',       dpv: 5,  factor: 1.25 },
+  { row: 18, seg: 'U5',    no: '6.2',  label: 'PCV (1 โดส)',             product: 'PCV',        dpv: 1,  factor: 1.01 },
+  { row: 19, seg: 'U5',    no: '7.',   label: 'OPV (20 โดส)',            product: 'OPV',        dpv: 20, factor: 1.33 },
+  { row: 20, seg: 'U5',    no: '8.',   label: 'MMR  (1 โดส)',            product: 'MMR',        dpv: 1,  factor: 1.01 },
+  { row: 21, seg: 'U5',    no: '9.1',  label: 'LAJE (1 โดส)',            product: 'LAJE',       dpv: 1,  factor: 1.01 },
+  { row: 22, seg: 'U5',    no: '9.2',  label: 'JE เชื้อตาย (1 โดส)',       product: 'JEK',        dpv: 1,  factor: 1.01 },
+  { row: 23, seg: 'U5',    no: '10.',  label: 'DTP (10 โดส)',            product: 'DTP',        dpv: 10, factor: 1.33 },
+  { row: 24, seg: 'P1',    no: '11.',  label: 'MMR  (1 โดส)',            product: 'MMR',        dpv: 1,  factor: 1.01 },
+  { row: 25, seg: 'P1',    no: '12.',  label: 'BCG (10 โดส)',            product: 'BCG',        dpv: 10, factor: 1.11 },
+  { row: 26, seg: 'P1',    no: '13.',  label: 'OPV (20 โดส)',            product: 'OPV',        dpv: 20, factor: 1.11 },
+  { row: 27, seg: 'P1',    no: '14.',  label: 'dT (10 โดส)',             product: 'DT',         dpv: 10, factor: 1.11 },
+  { row: 28, seg: 'P1',    no: '15.',  label: 'HB (2 โดส)',              product: 'HB2',        dpv: 2,  factor: 1.11 },
+  { row: 29, seg: 'P1',    no: '16.',  label: 'LAJE (1 โดส)',            product: 'LAJE',       dpv: 1,  factor: 1.01 },
+  { row: 30, seg: 'P1',    no: '17.',  label: 'IPV (1 โดส)',             product: 'IPV',        dpv: 1,  factor: 1.01 },
+  { row: 31, seg: 'P5',    no: '18.',  label: 'HPV (1 โดส)',             product: 'HPV',        dpv: 1,  factor: 1.01 },
+  { row: 32, seg: 'P6',    no: '19.',  label: 'dT (10 โดส)',             product: 'DT',         dpv: 10, factor: 1.11 },
+  { row: 33, seg: 'PREG',  no: '20.',  label: 'dT (10 โดส)',             product: 'DT',         dpv: 10, factor: 1.33 },
+  { row: 34, seg: 'PREG',  no: '21.',  label: 'Influenza (1 โดส)',       product: 'FLU',        dpv: 1,  factor: 1.01 },
+  { row: 35, seg: 'PREG',  no: '22.',  label: 'aP (1 โดส)',              product: 'AP',         dpv: 1,  factor: 1.01 },
+  { row: 36, seg: 'ADULT', no: '23.',  label: 'dT (10 โดส)',             product: 'DT',         dpv: 10, factor: 1.33 },
+  { row: 37, seg: 'ADULT', no: '24.',  label: 'MR (บุคลากรและนักศึกษาทางการแพทย์ฯ) (10 โดส)', product: 'MR', dpv: 10, factor: 1.33 },
+  { row: 38, seg: 'ADULT', no: '25.',  label: 'HB (บุคลากรทางการแพทย์และสาธารณสุข) (1 โดส)', product: 'HB1ML', dpv: 1, factor: 1.01 }
+];
+/** เลขแถวแบบฟอร์มเดิม (แถว 14–40) → แบบฟอร์มใหม่ — ใช้แปลงข้อมูลที่บันทึกก่อน v2.7 */
+var WV31_OLD_TO_NEW = { 14: 13, 15: 12, 16: 14, 17: 14, 18: 19, 19: 15, 20: 20, 21: 23, 22: 21, 23: 22, 24: 16, 25: 18, 26: 24, 27: 25, 28: 26,
+  29: 27, 30: 28, 31: 29, 32: 30, 33: 31, 34: 32, 35: 33, 36: 34, 37: 35, 38: 36, 39: 37, 40: 38 };
+var WV31_FIRST_ROW = 12, WV31_LAST_ROW = 38;
+var WV31_SEG_TH = { U5: 'เด็กแรกเกิด ถึง 5 ปี', P1: 'นักเรียน ป.1 (เก็บตกในรายที่ได้ไม่ครบถ้วน)', P5: 'นักเรียนหญิง ป.5', P6: 'นักเรียน ป.6', PREG: 'หญิงตั้งครรภ์', ADULT: 'คลินิกวัคซีนผู้ใหญ่' };
+
+/** แถวตามสมุดบันทึกสุขภาพเด็กแรกเกิด–5 ปี */
+var CARD_ROWS = [
+  ['แรกเกิด', ['HB1', 'BCG']], ['1 เดือน', ['HB2']], ['2 เดือน', ['DTP1', 'IPV1', 'ROTA1', 'PCV1']],
+  ['4 เดือน', ['DTP2', 'IPV2', 'ROTA2', 'PCV2']], ['6 เดือน', ['DTP3', 'OPV1', 'ROTA3']], ['9–12 เดือน', ['MMR1']],
+  ['1 ปี', ['LAJE1', 'PCV3']], ['1 ปี 6 เดือน', ['OPV2', 'DTP4', 'MMR2']], ['2 ปี 6 เดือน', ['LAJE2']],
+  ['4 ปี', ['OPV3', 'DTP5']], ['ป.5 (นร.หญิง)', ['HPV1']], ['ป.6', ['DT_P6']]
+];
+
+var COVERAGE_DEF = [
+  { cohort: 'เด็กอายุครบ 1 ปี (12–23 เดือน)', fromM: 12, toM: 24, items: [
+    ['BCG', 'BCG'], ['HB1', 'HB1'], ['DTP3', 'DTP-HB-Hib3'], ['IPV2', 'IPV2'], ['OPV1', 'OPV (6 เดือน)'],
+    ['ROTA_FULL', 'Rota ครบชุด'], ['PCV2', 'PCV 2 เข็ม (เฉพาะผู้มีสิทธิ์)'], ['MMR1', 'MMR1'] ] },
+  { cohort: 'เด็กอายุครบ 2 ปี (24–35 เดือน)', fromM: 24, toM: 36, items: [
+    ['DTP4', 'DTP4'], ['OPV2', 'OPV (1 ปี 6 เดือน)'], ['MMR2', 'MMR2'], ['LAJE1', 'LAJE1'], ['PCV_FULL', 'PCV ครบชุด (เฉพาะผู้มีสิทธิ์)'] ] },
+  { cohort: 'เด็กอายุครบ 3 ปี (36–47 เดือน)', fromM: 36, toM: 48, items: [ ['LAJE2', 'LAJE2'] ] },
+  { cohort: 'เด็กอายุครบ 5 ปี (60–71 เดือน)', fromM: 60, toM: 72, items: [ ['DTP5', 'DTP5'], ['OPV3', 'OPV (4 ปี)'] ] }
+];
+
+/* ---------------- วันที่ ---------------- */
+function eParse_(s) {
+  if (!s) return null;
+  if (Object.prototype.toString.call(s) === '[object Date]') return new Date(s.getFullYear(), s.getMonth(), s.getDate());
+  var m = String(s).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (!m) return null;
+  return new Date(+m[1], +m[2] - 1, +m[3]);
+}
+function eFmt_(d) {
+  if (!d) return '';
+  var m = d.getMonth() + 1, dd = d.getDate();
+  return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (dd < 10 ? '0' : '') + dd;
+}
+function eAddDays_(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+function eAddOffset_(d, off) {
+  if (!d) return null;
+  off = String(off == null ? '' : off).trim();
+  if (!off) return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  var re = /(\d+)\s*([dwmy])/gi, m, months = 0, days = 0;
+  while ((m = re.exec(off))) {
+    var n = +m[1], u = m[2].toLowerCase();
+    if (u === 'y') months += 12 * n; else if (u === 'm') months += n; else if (u === 'w') days += 7 * n; else days += n;
+  }
+  var base = new Date(d.getFullYear(), d.getMonth() + months, 1);
+  var last = new Date(base.getFullYear(), base.getMonth() + 1, 0).getDate();
+  base.setDate(Math.min(d.getDate(), last));
+  return eAddDays_(base, days);
+}
+function eMax_() { var r = null; for (var i = 0; i < arguments.length; i++) { var a = arguments[i]; if (a && (!r || a > r)) r = a; } return r; }
+function eDiffDays_(a, b) { return Math.round((b - a) / ENGINE_DAY_MS); }
+function eMonthsBetween_(a, b) {
+  var m = (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
+  if (b.getDate() < a.getDate()) m--;
+  return m;
+}
+function eAgeText_(dob, today) {
+  if (!dob || !today || today < dob) return '';
+  var m = eMonthsBetween_(dob, today), y = Math.floor(m / 12), mo = m % 12;
+  var anchor = eAddOffset_(dob, m + 'm'), d = eDiffDays_(anchor, today);
+  var s = [];
+  if (y) s.push(y + ' ปี');
+  if (mo) s.push(mo + ' เดือน');
+  if (!y && (d || !mo)) s.push(d + ' วัน');
+  return s.join(' ');
+}
+
+/* ---------------- เงื่อนไข ---------------- */
+function eCondOk_(cond, ctx) {
+  if (!cond) return true;
+  var parts = String(cond).split(';');
+  for (var i = 0; i < parts.length; i++) {
+    var c = parts[i].trim(); if (!c) continue;
+    var idx = c.indexOf(':'), k = (idx >= 0 ? c.slice(0, idx) : c).toUpperCase(), v = idx >= 0 ? c.slice(idx + 1).trim() : '';
+    var ok = true;
+    if (k === 'MOTHER_HBSAG_POS') ok = ctx.person.motherHBsAg === 'POS';
+    else if (k === 'FEMALE') ok = ctx.person.sex === 'F';
+    else if (k === 'MALE') ok = ctx.person.sex === 'M';
+    else if (k === 'BORN_FROM') ok = !!(ctx.dob && eParse_(v) && ctx.dob >= eParse_(v));
+    else if (k === 'BORN_BEFORE') ok = !!(ctx.dob && eParse_(v) && ctx.dob < eParse_(v));
+    else if (k === 'ROTA_3DOSE') ok = eRota3_(ctx);
+    if (!ok) return false;
+  }
+  return true;
+}
+function eRota3_(ctx) { return eRotaNeeds3_(ctx.records, ctx.settings, ctx.parentMode ? ctx.dob : null); }
+/**
+ * เด็กคนนี้ต้องได้ Rota กี่ครั้ง (true = 3 ครั้ง)
+ *  - เคยได้ชนิด 3 ครั้ง (ROTASIIL/RotaTeq) แม้เพียง 1 ครั้ง → 3 ครั้ง (กรณีให้ผสมชนิด ต้องให้ครบ 3 ครั้ง)
+ *  - ได้ Rotarix ทุกครั้ง → 2 ครั้ง
+ *  - ไม่ทราบชนิด → ดูวันที่ได้ Rota ครั้งแรก เทียบกับวันที่เริ่มใช้ ROTASIIL (ROTA_3DOSE_FROM)
+ *  - ยังไม่เคยได้ → ใช้วัคซีนที่หน่วยใช้ปัจจุบัน (ROTA_DEFAULT_DOSES)
+ *    ยกเว้นหน้าผู้ปกครอง (dobForPlan): ถ้าครบ 2 เดือนก่อนวันเปลี่ยนวัคซีน ถือว่าได้ Rotarix
+ */
+function eRotaNeeds3_(records, settings, dobForPlan) {
+  var rota = (records || []).filter(function (r) { return r.series === 'ROTA' && String(r.voided) !== 'Y'; });
+  var from = eParse_(String(settings.ROTA_3DOSE_FROM || '2025-10-01'));   // แนวทาง สธ.: เริ่มใช้ Rotasill 1 ต.ค. 2568
+  var def = String(settings.ROTA_DEFAULT_DOSES || '3') === '3';
+  if (rota.length) {
+    if (rota.some(function (r) { return String(r.product) === '3'; })) return true;
+    if (rota.every(function (r) { return String(r.product) === '2'; })) return false;
+    if (from) { var first = rota.map(function (r) { return r.dateGiven; }).sort()[0]; return eParse_(first) >= from; }
+    return def;
+  }
+  if (dobForPlan && from) return eAddOffset_(dobForPlan, '2m') >= from;
+  return def;
+}
+function eAfterSeries_(cond) {
+  var m = String(cond || '').match(/AFTER:([^;]+)/i);
+  return m ? m[1].split('|').map(function (s) { return s.trim(); }) : [];
+}
+
+/* ---------------- รอบนัดประจำเดือน ---------------- */
+function eIsMonthly_(ctx) { return String(ctx.settings.APPT_MODE || 'MONTHLY').toUpperCase() !== 'WEEKDAY'; }
+function eSkipOffDays_(d, ctx) {
+  var offRaw = ctx.settings.OFF_WEEKDAYS;
+  var off = String(offRaw == null || offRaw === '' ? '0,6' : offRaw).split(',').map(function (s) { return s.trim(); }).filter(String);
+  var hol = {}; (ctx.holidays || []).forEach(function (h) { hol[String(h.date || h)] = 1; });
+  var x = d;
+  for (var i = 0; i < 31; i++) {
+    if (off.indexOf(String(x.getDay())) < 0 && !hol[eFmt_(x)]) return x;
+    x = eAddDays_(x, 1);
+  }
+  return d;
+}
+function eSessionOfMonth_(y, m, ctx) {
+  var day = parseInt(ctx.settings.APPT_DAY_OF_MONTH, 10); if (isNaN(day) || day < 1) day = 20;
+  var last = new Date(y, m + 1, 0).getDate();
+  return eSkipOffDays_(new Date(y, m, Math.min(day, last)), ctx);
+}
+function eNextSession_(from, ctx) {
+  for (var i = 0; i < 48; i++) {
+    var s = eSessionOfMonth_(from.getFullYear(), from.getMonth() + i, ctx);
+    if (s >= from) return s;
+  }
+  return from;
+}
+function eUpcomingSessions_(today, ctx, n) {
+  var out = [], d = today;
+  for (var i = 0; i < n; i++) { var s = eNextSession_(d, ctx); out.push(eFmt_(s)); d = eAddDays_(s, 1); }
+  return out;
+}
+function eShiftToClinicDay_(d, ctx) {
+  var days = String(ctx.settings.CLINIC_DAYS || '').split(',').map(function (s) { return s.trim(); }).filter(String);
+  var hol = {}; (ctx.holidays || []).forEach(function (h) { hol[String(h.date || h)] = 1; });
+  var x = d;
+  for (var i = 0; i < 21; i++) {
+    if ((!days.length || days.indexOf(String(x.getDay())) >= 0) && !hol[eFmt_(x)]) return x;
+    x = eAddDays_(x, 1);
+  }
+  return d;
+}
+/** วันนัดของวัคซีน 1 เข็ม: รอบแรกที่ครบเกณฑ์ (DUE=ครบอายุตามตาราง / MIN=ถึงอายุต่ำสุด) และไม่เกินอายุสูงสุด */
+function eApptFor_(earliest, due, maxD, from, ctx) {
+  if (!eIsMonthly_(ctx)) {
+    var t = eShiftToClinicDay_(eMax_(due, from), ctx);
+    if (maxD && t > maxD) t = eMax_(due, from);
+    return { date: t, rescued: false, urgent: !!(maxD && t > maxD) };
+  }
+  var useMin = String(ctx.settings.APPT_ELIGIBILITY || 'DUE').toUpperCase() === 'MIN';
+  var s = eNextSession_(eMax_(useMin ? earliest : due, from), ctx);
+  if (maxD && s > maxD) {
+    var s2 = eNextSession_(eMax_(earliest, from), ctx);
+    if (s2 <= maxD) return { date: s2, rescued: true, urgent: false };
+    return { date: null, rescued: false, urgent: true };
+  }
+  return { date: s, rescued: false, urgent: false };
+}
+
+/* ---------------- สถานะ ---------------- */
+var STATUS_TEXT = {
+  DONE: 'ได้รับแล้ว', DUE: 'ถึงกำหนด', OVERDUE: 'เลยกำหนด', UPCOMING: 'ยังไม่ถึงกำหนด',
+  PLANNED: 'ตามแผน', PRIOR: 'ได้รับแล้ว (ไม่มีวันที่)', NA: 'ไม่เข้าเกณฑ์', EXPIRED: 'เกินอายุที่ให้ได้', CHECK: 'ตรวจสอบประวัติ'
+};
+function eStatus_(due, today, grace) {
+  if (today < due) return 'UPCOMING';
+  if (today <= eAddDays_(due, grace)) return 'DUE';
+  return 'OVERDUE';
+}
+function baseItem_(r) {
+  return { ruleId: r.ruleId, series: r.series, seriesName: r.seriesName, doseNo: +r.doseNo, label: r.label,
+    group: r.group, note: r.note || '', status: '', dueDate: '', earliest: '', maxDate: '', dateGiven: '', apptDate: '', apptUrgent: false,
+    stockProducts: String(r.stockProducts || '') };
+}
+
+/* ---------------- PCV10 (Pneumosil) ตามคู่มือปฏิบัติงานวัคซีน PCV สำหรับหน่วยบริการปฐมภูมิ (สสจ.อุบลราชธานี 2569) ----------------
+ *  - เริ่มให้บริการ PCV_START (1 ต.ค. 2569) • สิทธิ สปสช.: เด็กไทยที่เกิดตั้งแต่ PCV_BORN_FROM (1 ต.ค. 2568)
+ *  - มาตรฐาน 2p+1: 2, 4, 12 เดือน • มาช้าไม่เริ่มชุดใหม่ ดูอายุตอนได้เข็มแรก
+ *  - เริ่มก่อน 12 เดือน = 3 เข็ม (เข็ม 2 ห่าง ≥ 4 สัปดาห์, กระตุ้นอายุ 12 เดือน ห่างเข็ม 2 ≥ 8 สัปดาห์)
+ *  - เริ่ม 12–23 เดือน = 2 เข็ม ห่าง ≥ 8 สัปดาห์ ไม่ต้องกระตุ้น • เริ่มเมื่ออายุ ≥ 24 เดือน อยู่นอกอายุที่วัคซีนรับรอง
+ */
+function ePcvDone_(recs, dobStr) {
+  var dob = eParse_(dobStr);
+  var g = (recs || []).filter(function (r) { return r.series === 'PCV' && String(r.voided) !== 'Y' && r.dateGiven; })
+    .map(function (r) { return eParse_(r.dateGiven); }).sort(function (a, b) { return a - b; });
+  var startM = g.length && dob ? eMonthsBetween_(dob, g[0]) : null;
+  var need = startM != null && startM >= 12 ? 2 : 3;
+  return { n: g.length, startM: startM, need: need, complete: g.length >= need };
+}
+function ePcvSeries_(list, c, recs, dob, today, ctx, out, grace) {
+  var s = c.settings || {}, start = eParse_(String(s.PCV_START || '2026-10-01')), bornFrom = eParse_(String(s.PCV_BORN_FROM || '2025-10-01'));
+  var given = recs.filter(function (r) { return r.series === 'PCV'; }).sort(function (a, b) { return String(a.dateGiven).localeCompare(String(b.dateGiven)); });
+  var rows = list.slice(0, 3);
+  if (!given.length && !(dob >= bornFrom)) {
+    rows.forEach(function (r) { var it = baseItem_(r); it.status = 'NA'; it.note = 'สิทธิ สปสช. สำหรับเด็กที่เกิดตั้งแต่ ' + eFmt_(bornFrom); out.items.push(it); });
+    return;
+  }
+  var prev = null, startM = null, need = 3, pendingFound = false, stop = false;
+  rows.forEach(function (r, i) {
+    var it = baseItem_(r), rec = given[i];
+    if (rec) {
+      var gd = eParse_(rec.dateGiven);
+      it.status = 'DONE'; it.dateGiven = rec.dateGiven; it.recId = rec.recId; it.place = rec.place; it.placeName = rec.placeName;
+      it.lotNo = rec.lotNo; it.exp = rec.exp; it.ageAtDose = eAgeText_(dob, gd);
+      if (i === 0) { startM = eMonthsBetween_(dob, gd); need = startM >= 12 ? 2 : 3; }
+      prev = gd; out.items.push(it); return;
+    }
+    if (stop) { it.status = 'EXPIRED'; out.items.push(it); return; }
+    if (i >= need) { it.status = 'NA'; it.note = 'ไม่ต้องให้ — เริ่ม PCV เมื่ออายุ 12 เดือนขึ้นไป ฉีด 2 เข็มถือว่าครบ'; out.items.push(it); return; }
+    var earliest, due, maxIncl = null;
+    if (i === 0) {
+      earliest = eAddOffset_(dob, '6w'); due = eAddOffset_(dob, '2m');
+      maxIncl = eAddDays_(eAddOffset_(dob, '24m'), -1);
+    } else if (i === 1) {
+      if (need === 3) { earliest = eMax_(eAddOffset_(dob, '10w'), eAddOffset_(prev, '4w')); due = eMax_(eAddOffset_(dob, '4m'), eAddOffset_(prev, '4w')); }
+      else { earliest = eAddOffset_(prev, '8w'); due = earliest; }
+    } else {
+      earliest = eMax_(eAddOffset_(dob, startM != null && startM >= 7 ? '12m' : '9m'), eAddOffset_(prev, '8w'));
+      due = eMax_(eAddOffset_(dob, '12m'), eAddOffset_(prev, '8w'));
+    }
+    earliest = eMax_(earliest, start); due = eMax_(due, earliest);
+    it.earliest = eFmt_(earliest); it.dueDate = eFmt_(due); it.maxDate = maxIncl ? eFmt_(maxIncl) : '';
+    if (i === 0 && eMax_(earliest, today) > maxIncl) {
+      it.status = 'EXPIRED'; it.note = 'อายุเกิน 2 ปี — นอกอายุที่วัคซีน PCV10 (Pneumosil) รับรอง';
+      stop = true; out.items.push(it); return;
+    }
+    var ap = eApptFor_(earliest, due, maxIncl, today, ctx), projected = ap.date || eMax_(due, today);
+    if (!pendingFound) {
+      it.status = eStatus_(due, today, grace); it.canGiveNow = today >= earliest; it.isNextCandidate = true;
+      pendingFound = true;
+    } else it.status = 'PLANNED';
+    it.apptDate = eFmt_(ap.date); it.apptUrgent = ap.urgent; it.apptRescued = ap.rescued;
+    if (i === 0) { startM = eMonthsBetween_(dob, projected); need = startM >= 12 ? 2 : 3; }
+    if (need === 2 && i === 0) it.note = 'เริ่มเมื่ออายุ ≥ 12 เดือน: ฉีด 2 เข็ม ห่างกัน ≥ 8 สัปดาห์';
+    prev = projected; out.items.push(it);
+  });
+}
+
+/**
+ * คำนวณตารางวัคซีนของบุคคล 1 ราย
+ * ctx: { person, records[], pregnancies[], rules[], settings{}, holidays[], today:'yyyy-mm-dd' }
+ */
+function computeSchedule_(ctx) {
+  var today = eParse_(ctx.today) || eParse_(eFmt_(new Date()));
+  var dob = eParse_(ctx.person.dob);
+  var grace = parseInt(ctx.settings.GRACE_DAYS, 10); if (isNaN(grace)) grace = 30;
+  var recs = (ctx.records || []).filter(function (r) { return String(r.voided) !== 'Y'; })
+    .sort(function (a, b) { return String(a.dateGiven).localeCompare(String(b.dateGiven)); });
+  var c = { person: ctx.person, dob: dob, records: recs, settings: ctx.settings || {}, parentMode: !!ctx.parentMode };
+  var rules = (ctx.rules || []).filter(function (r) { return String(r.active || 'Y') === 'Y'; });
+  var out = { ageText: eAgeText_(dob, today), items: [], pregnancy: [], next: null };
+  if (!dob) return out;
+
+  var seriesMap = {}, order = [];
+  rules.forEach(function (r) {
+    if (r.group === 'PREG') return;
+    if (!seriesMap[r.series]) { seriesMap[r.series] = []; order.push(r.series); }
+    seriesMap[r.series].push(r);
+  });
+
+  order.forEach(function (sk) {
+    var list = seriesMap[sk].sort(function (a, b) { return (+a.doseNo) - (+b.doseNo); });
+    var g = GROUP_WINDOWS[list[0].group] || GROUP_WINDOWS.CHILD;
+    var hasRec = recs.some(function (r) { return r.series === sk; });
+    var inWin = today >= eAddOffset_(dob, g.from) && today < eAddOffset_(dob, g.to);
+    if (!inWin && !hasRec) return;
+
+    if (list[0].repeat) {
+      var r0 = list[0], after = eAfterSeries_(r0.condition); if (after.indexOf(sk) < 0) after.push(sk);
+      var last = null;
+      recs.forEach(function (x) { if (after.indexOf(x.series) >= 0) last = eMax_(last, eParse_(x.dateGiven)); });
+      var adultFrom = eAddOffset_(dob, r0.minAge || '0d');
+      if (today < adultFrom && !last) return;
+      var it = baseItem_(r0);
+      if (!last) { it.status = 'CHECK'; it.dueDate = eFmt_(today); it.earliest = eFmt_(today); it.isNextCandidate = false; }
+      else {
+        var due = eMax_(eAddOffset_(last, r0.repeat), adultFrom);
+        it.lastDate = eFmt_(last); it.dueDate = eFmt_(due); it.earliest = eFmt_(due);
+        it.status = eStatus_(due, today, 365);
+        it.isNextCandidate = it.status !== 'UPCOMING' || eDiffDays_(today, due) <= 60;
+        var ap = eApptFor_(due, due, null, today, ctx); it.apptDate = eFmt_(ap.date);
+        it.canGiveNow = today >= due;
+      }
+      out.items.push(it);
+      return;
+    }
+
+    if (sk === 'PCV') { ePcvSeries_(list, c, recs, dob, today, ctx, out, grace); return; }
+    var prev = null, pendingFound = false, expiredChain = false;
+    // เข็มหลังสุดที่มีบันทึกในชุดนี้ → เข็มก่อนหน้าที่ไม่มีวันที่ ถือว่าได้รับแล้ว (เช่น นำเข้าจาก JHCIS มีแค่ DTP3)
+    var maxDone = 0;
+    list.forEach(function (r) { if (recs.some(function (x) { return x.ruleId === r.ruleId; })) maxDone = Math.max(maxDone, +r.doseNo); });
+    list.forEach(function (r) {
+      var it = baseItem_(r);
+      var rec = recs.filter(function (x) { return x.ruleId === r.ruleId; })[0];
+      if (!rec && +r.doseNo < maxDone) {
+        it.status = 'PRIOR'; it.note = 'มีบันทึกเข็มถัดไปแล้ว — ไม่มีวันที่ของเข็มนี้';
+        out.items.push(it); return;
+      }
+      if (rec) {
+        it.status = 'DONE'; it.dateGiven = rec.dateGiven; it.recId = rec.recId; it.place = rec.place; it.placeName = rec.placeName;
+        it.lotNo = rec.lotNo; it.exp = rec.exp; it.ageAtDose = eAgeText_(dob, eParse_(rec.dateGiven));
+        prev = eParse_(rec.dateGiven);
+        out.items.push(it); return;
+      }
+      if (!eCondOk_(r.condition, c)) { it.status = 'NA'; out.items.push(it); return; }
+      var earliest = eMax_(eAddOffset_(dob, r.minAge || '0d'), prev && r.minInterval ? eAddOffset_(prev, r.minInterval) : prev);
+      var due = eMax_(eAddOffset_(dob, r.recAge || r.minAge || '0d'),
+        prev ? eAddOffset_(prev, r.recInterval || r.minInterval || '0d') : null, earliest);
+      var maxD = r.maxAge ? eAddOffset_(dob, r.maxAge) : null;
+      var maxIncl = maxD ? eAddDays_(maxD, -1) : null;
+      it.earliest = eFmt_(earliest); it.dueDate = eFmt_(due); it.maxDate = maxIncl ? eFmt_(maxIncl) : '';
+      var projected = eMax_(due, today);
+      if (expiredChain) { it.status = 'EXPIRED'; }
+      else {
+        var ap = eApptFor_(earliest, due, maxIncl, today, ctx);
+        if (!pendingFound) {
+          var feasible = eMax_(earliest, today);
+          if (maxD && feasible >= maxD) { it.status = 'EXPIRED'; expiredChain = true; }
+          else {
+            it.status = eStatus_(due, today, grace); it.canGiveNow = today >= earliest; it.isNextCandidate = true;
+            it.apptDate = eFmt_(ap.date); it.apptUrgent = ap.urgent; it.apptRescued = ap.rescued;
+          }
+          pendingFound = true;
+        } else {
+          if (maxD && due >= maxD && !ap.date) it.status = 'EXPIRED';
+          else { it.status = 'PLANNED'; it.apptDate = eFmt_(ap.date); it.apptUrgent = ap.urgent; }
+        }
+        if (ap.date) projected = ap.date; // เข็มถัดไปนับจากวันที่คาดว่าจะมาฉีดจริง (รอบวันที่ 20)
+      }
+      prev = projected;
+      out.items.push(it);
+    });
+  });
+
+  (ctx.pregnancies || []).forEach(function (pg) {
+    if (pg.status === 'CLOSED') return;
+    var lmp = eParse_(pg.lmp); if (!lmp) return;
+    var edc = eParse_(pg.edc) || eAddDays_(lmp, 280);
+    if (today > eAddDays_(edc, 42)) return;
+    var gaDays = eDiffDays_(lmp, today);
+    var block = { pregId: pg.pregId, lmp: pg.lmp, edc: eFmt_(edc), gaText: Math.floor(gaDays / 7) + ' สัปดาห์ ' + (gaDays % 7) + ' วัน', items: [] };
+    rules.filter(function (r) { return r.group === 'PREG'; }).forEach(function (r) {
+      var it = baseItem_(r); it.pregId = pg.pregId;
+      var rec = recs.filter(function (x) { return x.ruleId === r.ruleId && x.pregId === pg.pregId; })[0];
+      if (rec) { it.status = 'DONE'; it.dateGiven = rec.dateGiven; it.recId = rec.recId; it.lotNo = rec.lotNo; it.exp = rec.exp; block.items.push(it); return; }
+      var earliest = eAddOffset_(lmp, r.minAge || '0d');
+      var due = eMax_(eAddOffset_(lmp, r.recAge || '0d'), earliest);
+      var maxD = r.maxAge ? eAddOffset_(lmp, r.maxAge) : edc;
+      if (maxD > edc) maxD = edc;
+      var maxIncl = eAddDays_(maxD, -1);
+      it.earliest = eFmt_(earliest); it.dueDate = eFmt_(due); it.maxDate = eFmt_(maxIncl);
+      if (eMax_(earliest, today) >= maxD) it.status = 'EXPIRED';
+      else {
+        it.status = eStatus_(due, today, 14); it.canGiveNow = today >= earliest; it.isNextCandidate = true;
+        var ap = eApptFor_(earliest, due, maxIncl, today, ctx); it.apptDate = eFmt_(ap.date); it.apptUrgent = ap.urgent; it.apptRescued = ap.rescued;
+      }
+      block.items.push(it);
+    });
+    out.pregnancy.push(block);
+  });
+
+  out.next = nextAppointment_(out, today, ctx);
+  // วันนัดตรวจพัฒนาการ DSPM (9, 18, 30, 42, 60 เดือน) ตามสมุดบันทึกสุขภาพ
+  if (today < eAddOffset_(dob, '6y')) out.dspm = [9, 18, 30, 42, 60].map(function (m) { return { months: m, date: eFmt_(eAddOffset_(dob, m + 'm')) }; });
+  var fin = function (it) { it.statusText = STATUS_TEXT[it.status] || it.status; };
+  out.items.forEach(fin);
+  out.pregnancy.forEach(function (b) { b.items.forEach(fin); });
+  return out;
+}
+
+/** นัดครั้งถัดไป = วันนัดที่เร็วที่สุดของเข็มที่รออยู่ + รวมทุกวัคซีนที่ครบเกณฑ์ในวันนั้น */
+/** วัคซีนที่ไม่นัดที่ รพ.สต. (ค่าเริ่มต้น BCG, HB1 — ได้รับที่โรงพยาบาลตอนคลอด) */
+function eApptExclude_(settings) {
+  var v = settings && settings.APPT_EXCLUDE_RULES, o = {};
+  String(v == null ? 'BCG,HB1' : v).split(',').forEach(function (x) { x = x.trim(); if (x) o[x] = 1; });
+  return o;
+}
+function nextAppointment_(sched, today, ctx) {
+  var cands = [], apptEx = eApptExclude_(ctx.settings);
+  sched.items.concat.apply(sched.items, sched.pregnancy.map(function (b) { return b.items; })).forEach(function (it) {
+    if (it.isNextCandidate && ['UPCOMING', 'DUE', 'OVERDUE'].indexOf(it.status) >= 0 && !apptEx[it.ruleId]) cands.push(it);
+  });
+  if (!cands.length) return null;
+  var monthly = eIsMonthly_(ctx);
+  var useMin = String(ctx.settings.APPT_ELIGIBILITY || 'DUE').toUpperCase() === 'MIN';
+  var coDays = parseInt(ctx.settings.CO_ADMIN_DAYS, 10); if (isNaN(coDays)) coDays = 30;
+  var warnings = [], best = null;
+  var urgent = cands.filter(function (it) { return it.apptUrgent; });
+  cands.forEach(function (it) { if (it.apptDate && !it.apptUrgent) { var d = eParse_(it.apptDate); if (!best || d < best) best = d; } });
+  var eligibleOn = function (it, d) {
+    if (it.apptUrgent || !it.apptDate) return false;
+    var e = eParse_(it.earliest), du = eParse_(it.dueDate), mx = it.maxDate ? eParse_(it.maxDate) : null;
+    if (e > d || (mx && d > mx)) return false;
+    if (it.apptRescued) return true;
+    return (useMin || !monthly) ? du <= eAddDays_(d, coDays) : du <= d;
+  };
+  urgent.forEach(function (it) {
+    warnings.push(it.label + ' ต้องฉีดภายใน ' + it.maxDate + ' ซึ่งก่อนวันนัดรอบถัดไป — พิจารณาฉีดวันนี้หรือนัดพิเศษ');
+  });
+  var date, give, special = false;
+  if (best) {
+    date = best;
+    give = cands.filter(function (it) { return eligibleOn(it, date); });
+  } else {
+    urgent.forEach(function (it) { var d = eMax_(eParse_(it.earliest), today); if (!date || d < date) date = d; });
+    give = urgent.filter(function (it) { return eParse_(it.earliest) <= date; });
+    special = true;
+  }
+  cands.forEach(function (it) {
+    if (it.apptRescued && give.indexOf(it) < 0) warnings.push(it.label + ' ต้องฉีดภายใน ' + it.maxDate + ' (นัดรอบ ' + it.apptDate + ')');
+  });
+  return { date: eFmt_(date), ruleIds: give.map(function (g) { return g.ruleId; }), labels: give.map(function (g) { return g.label; }),
+    warnings: warnings, isToday: eFmt_(date) === eFmt_(today), special: special, mode: monthly ? 'MONTHLY' : 'WEEKDAY',
+    urgentRuleIds: urgent.map(function (u) { return u.ruleId; }),
+    sessions: monthly ? eUpcomingSessions_(today, ctx, 4) : [] };
+}
+
+/* ---------------- คลังวัคซีน / ว.3/1 ---------------- */
+function eProduct_(code) { for (var i = 0; i < STOCK_PRODUCTS.length; i++) if (STOCK_PRODUCTS[i].code === code) return STOCK_PRODUCTS[i]; return null; }
+/** กลุ่มเป้าหมายในแบบ ว.3/1 ของการฉีด 1 ครั้ง */
+function eSegmentFor_(rule, ageMonths, pregnant) {
+  if (rule.group === 'PREG') return 'PREG';
+  if (rule.ruleId === 'HPV1') return 'P5';
+  if (rule.ruleId === 'DT_P6') return 'P6';
+  if (rule.group === 'ADULT') return pregnant ? 'PREG' : 'ADULT';
+  return ageMonths < 72 ? 'U5' : 'P1';
+}
+/** หาแถว ว.3/1 จาก กลุ่ม + ผลิตภัณฑ์ (ถ้ากลุ่มนั้นไม่มีแถวผลิตภัณฑ์นี้ ใช้แถวกลุ่ม U5) */
+function eWv31Row_(seg, product) {
+  var has = function (x) { return x.product === product || (x.alt || []).indexOf(product) >= 0; };
+  var r = WV31_ROWS.filter(function (x) { return x.seg === seg && has(x); })[0];
+  if (!r) r = WV31_ROWS.filter(function (x) { return x.seg === 'U5' && has(x); })[0];
+  if (!r) r = WV31_ROWS.filter(has)[0];
+  return r ? r.row : null;
+}
+function eDefaultProduct_(rule, settings) {
+  var list = String(rule.stockProducts || '').split('|').filter(String);
+  if (!list.length) return '';
+  if (list.indexOf('DTPHBHIB10') >= 0 && String(settings.DTPHBHIB_PACK || '10') === '1') return 'DTPHBHIB1';
+  return list[0];
+}
+/** คำนวณคอลัมน์ E G J ตามสูตรในแบบฟอร์ม */
+function eWv31Calc_(row, D, F, H, I) {
+  var def = WV31_ROWS.filter(function (x) { return x.row === row; })[0];
+  var E = Math.ceil(Math.round(D * def.factor / (def.eDiv || def.dpv) * 1e6) / 1e6);
+  var G = F - E >= 0 ? 0 : E - F;
+  var J = I ? Math.round(((I * def.dpv - H) / (I * def.dpv)) * 10000) / 100 : '';
+  return { E: E, G: G, J: J };
+}
+
+/** ความครอบคลุมวัคซีน */
+function computeCoverage_(persons, recsByPerson, settings, todayStr) {
+  var today = eParse_(todayStr);
+  var mooList = String(settings.MOO_LIST || '').split(',').map(function (s) { return s.trim(); }).filter(String);
+  var pcvFrom = eParse_(String(settings.PCV_BORN_FROM || '2025-10-01'));
+  return COVERAGE_DEF.map(function (def) {
+    var cohort = persons.filter(function (p) {
+      if (p.status !== 'ACTIVE') return false;
+      if (mooList.length && mooList.indexOf(String(p.moo)) < 0) return false;
+      var dob = eParse_(p.dob); if (!dob) return false;
+      var m = eMonthsBetween_(dob, today); return m >= def.fromM && m < def.toM;
+    });
+    var rows = def.items.map(function (it) {
+      var key = it[0], den = 0, num = 0;
+      cohort.forEach(function (p) {
+        var rs = (recsByPerson[p.personId] || []).filter(function (r) { return String(r.voided) !== 'Y'; });
+        var has = function (id) { return rs.some(function (r) { return r.ruleId === id; }); };
+        if (key.indexOf('PCV') === 0 && !(eParse_(p.dob) >= pcvFrom)) return;
+        den++;
+        if (key === 'PCV2') { if (ePcvDone_(rs, p.dob).n >= 2) num++; }
+        else if (key === 'PCV_FULL') { if (ePcvDone_(rs, p.dob).complete) num++; }
+        else if (key === 'ROTA_FULL') {
+          var need3 = eRotaNeeds3_(rs, settings, null);
+          if (has('ROTA2') && (!need3 || has('ROTA3'))) num++;
+        } else if (has(key)) num++;
+      });
+      var target = key.indexOf('MMR') === 0 ? 95 : 90;
+      return { key: key, label: it[1], num: num, den: den, pct: den ? Math.round(num * 1000 / den) / 10 : null, target: target };
+    });
+    return { cohort: def.cohort, n: cohort.length, rows: rows };
+  });
+}
+
+
+function parentInfo() {
+  var s = settings_();
+  return { facility: s.FACILITY_NAME, addr: s.FACILITY_ADDR || '', phone: s.FACILITY_PHONE || '', time: s.APPT_TIME || '',
+    place: s.APPT_PLACE || s.FACILITY_NAME, apptDay: s.APPT_DAY_OF_MONTH || '20', today: todayStr_() };
+}
+function parentSchedule(dob) {
+  if (!isYmd_(dob)) throw new Error('กรุณาเลือกวันเกิดให้ครบ');
+  var today = todayStr_();
+  if (dob > today) throw new Error('วันเกิดต้องไม่เกินวันนี้');
+  var d = eParse_(dob);
+  if (eMonthsBetween_(d, eParse_(today)) >= 72) throw new Error('หน้านี้ใช้สำหรับเด็กอายุไม่เกิน 6 ปี');
+  var ctx = { parentMode: true, person: { personId: 'PARENT', dob: dob, sex: '', motherHBsAg: 'UNK' }, records: [], pregnancies: [],
+    rules: rules_(), settings: settings_(), holidays: holidays_(), today: dob };   // คาดการณ์วันนัดตั้งแต่แรกเกิด เหมือนสมุดบันทึกสุขภาพ
+  var sc = computeSchedule_(ctx), map = {};
+  sc.items.forEach(function (it) { map[it.ruleId] = it; });
+  var rows = [];
+  CARD_ROWS.forEach(function (row) {
+    var items = row[1].map(function (id) { return map[id]; }).filter(function (it) {
+      return it && it.group === 'CHILD' && it.status !== 'NA' && it.status !== 'EXPIRED' && it.apptDate;
+    });
+    if (!items.length) return;
+    if (['แรกเกิด', '1 เดือน', 'ป.5 (นร.หญิง)', 'ป.6'].indexOf(row[0]) >= 0) return;   // แสดงช่วง 2 เดือน – 4 ปี
+    // วัคซีนในช่วงอายุเดียวกันแต่วันนัดต่างกัน (เช่น PCV เก็บตกหลังเริ่มให้บริการ 1 ต.ค. 2569) → แยกแถวตามวันนัด
+    var byDate = {};
+    items.forEach(function (i) { (byDate[i.apptDate] = byDate[i.apptDate] || []).push(i.ruleId); });
+    Object.keys(byDate).sort().forEach(function (date, k) {
+      rows.push({ age: row[0] + (k > 0 ? ' (เก็บตก)' : ''), date: date, dateTh: thDate_(date), weekday: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'][eParse_(date).getDay()],
+        vaccines: byDate[date] });
+    });
+  });
+  rows.sort(function (a, b) { return a.date.localeCompare(b.date); });
+  // แถว "(เก็บตก)" ที่วันนัดตรงกับช่วงอายุอื่น → รวมเป็นนัดเดียว
+  rows = rows.filter(function (r) {
+    if (r.age.indexOf('(เก็บตก)') < 0) return true;
+    var host = rows.filter(function (x) { return x !== r && x.date === r.date && x.age.indexOf('(เก็บตก)') < 0; })[0];
+    if (!host) return true;
+    host.vaccines = host.vaccines.concat(r.vaccines); return false;
+  });
+  // แบบบันทึกสุขภาพเด็กแรกเกิด–5 ปี (สำหรับพิมพ์) — ทุกช่วงอายุ วันนัดตามค่าระบบ
+  var card = CARD_ROWS.map(function (row) {
+    var school = row[0] === 'ป.5 (นร.หญิง)' || row[0] === 'ป.6', birth = row[0] === 'แรกเกิด';
+    var items = row[1].map(function (id) { return map[id]; }).filter(function (it) {
+      if (!it) return false;
+      if (school) return true;
+      return it.group === 'CHILD' && it.status !== 'NA' && it.status !== 'EXPIRED' && (birth || it.apptDate);
+    });
+    var ids = school ? row[1].slice() : items.map(function (i) { return i.ruleId; }), note = '';
+    var date = birth ? dob : (school ? '' : (items.map(function (i) { return i.apptDate; }).filter(String).sort()[0] || ''));
+    if (row[0] === '1 เดือน' && !ids.length) {                          // HB2 เฉพาะเด็กที่แม่ HBsAg บวก — แสดงช่องไว้ให้เหมือนสมุด
+      ids = ['HB2']; note = 'เฉพาะแม่ HBsAg บวก';
+      date = eFmt_(eNextSession_(eAddOffset_(d, '1m'), ctx));
+    }
+    var dates = ids.map(function (id) { return birth ? dob : (school ? '' : ((map[id] && map[id].apptDate) || date)); });
+    return { age: row[0], date: date, dates: dates, vaccines: ids, school: school, note: note };
+  }).filter(function (r) { return r.vaccines.length; });
+  var out = { dob: dob, ageText: eAgeText_(d, eParse_(today)), rows: rows, card: card, dspm: sc.dspm || [],
+    facility: settings_().FACILITY_NAME || '', apptDay: String(settings_().APPT_DAY_OF_MONTH || '20'), pcvEligible: rows.some(function (r) { return r.vaccines.some(function (v) { return v.indexOf('PCV') === 0; }); }) };
+  return out;
+}
+
+/* ---------- แทน google.script.run: เรียกฟังก์ชันในหน้านี้เอง (ไม่มีการส่งข้อมูลออกนอกเครื่อง) ---------- */
+var google = { script: { run: (function () {
+  function R(ok, fail) { this._ok = ok; this._fail = fail; }
+  R.prototype.withSuccessHandler = function (f) { return new R(f, this._fail); };
+  R.prototype.withFailureHandler = function (f) { return new R(this._ok, f); };
+  ['parentInfo', 'parentSchedule'].forEach(function (name) {
+    R.prototype[name] = function () {
+      var self = this, args = arguments;
+      setTimeout(function () {
+        try { var r = window[name].apply(null, args); if (self._ok) self._ok(r); }
+        catch (e) { if (self._fail) self._fail(e); else console.error(e); }
+      }, 0);
+    };
+  });
+  return new R();
+})() } };
+</script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var TH_M = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+  var INFO = null, LAST = null;
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function thD(s) { var p = s.split('-'); return (+p[2]) + ' ' + TH_M[+p[1] - 1] + ' ' + (+p[0] + 543); }
+  function today() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+
+  /* ---------- ไอคอน ---------- */
+  var IC = {
+    inj: '<svg viewBox="0 0 24 24"><g fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M20 4l-9 9M15 6l3 3M7 11l6 6M4 20l3-3"/><path d="M8 10l6 6-4 4-6-6z" fill="#99f6e4"/></g></svg>',
+    drop: '<svg viewBox="0 0 24 24"><path d="M12 3C9 7 6 10.5 6 14a6 6 0 0 0 12 0c0-3.5-3-7-6-11z" fill="#bae6fd" stroke="#0369a1" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5" stroke="#0369a1" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>'
+  };
+  var BG = { inj: '#ccfbf1', drop: '#e0f2fe' };
+
+  /* ---------- ข้อมูลวัคซีน (สรุปจากเอกสารกรมควบคุมโรค) ---------- */
+  var SE = {
+    dtp: 'อาจมีไข้ อ่อนเพลีย ร้องกวน เริ่มหลังฉีดประมาณ 3–4 ชั่วโมง มักหายภายใน 2 วัน และอาจปวด บวม แดงบริเวณที่ฉีด',
+    ipv: 'พบอาการข้างเคียงน้อย อาจปวด บวม แดงเล็กน้อยบริเวณที่ฉีด',
+    opv: 'เป็นวัคซีนชนิดหยอด พบอาการข้างเคียงน้อยมาก',
+    rota: 'เป็นวัคซีนชนิดหยอด อาจมีไข้ เบื่ออาหาร ถ่ายเหลว อาเจียน หรืองอแง ซึ่งไม่รุนแรง',
+    pcv: 'อาจปวด บวม แดงบริเวณที่ฉีด มีไข้ต่ำ ๆ หรืองอแงได้ 1–2 วัน',
+    mmr: 'อาจปวด บวม แดงบริเวณที่ฉีด หลังฉีด 5–12 วันอาจมีไข้ ผื่น หรือต่อมน้ำเหลืองโต และหายได้เองภายใน 2–3 วัน',
+    je: 'อาจบวม แดง เจ็บบริเวณที่ฉีด มีไข้ ปวดศีรษะ หรืออ่อนเพลีย'
+  };
+  function vax(id) {
+    var n = +(id.match(/\d+$/) || [0])[0];
+    if (/^DTP[123]$/.test(id)) return { n: 'DTP-HB-Hib ครั้งที่ ' + n, d: 'คอตีบ บาดทะยัก ไอกรน ตับอักเสบบี และโรคติดเชื้อฮิบ', i: 'inj', se: 'dtp' };
+    if (/^DTP[45]$/.test(id)) return { n: 'DTP กระตุ้นครั้งที่ ' + (n - 3), d: 'คอตีบ บาดทะยัก ไอกรน', i: 'inj', se: 'dtp' };
+    if (/^IPV/.test(id)) return { n: 'IPV ครั้งที่ ' + n, d: 'โปลิโอ (ชนิดฉีด)', i: 'inj', se: 'ipv' };
+    if (/^OPV/.test(id)) return { n: 'OPV ครั้งที่ ' + n, d: 'โปลิโอ (ชนิดหยอด)', i: 'drop', se: 'opv' };
+    if (/^ROTA/.test(id)) return { n: 'Rota ครั้งที่ ' + n, d: 'ท้องร่วงจากไวรัสโรต้า (ชนิดหยอด)', i: 'drop', se: 'rota' };
+    if (/^PCV3/.test(id)) return { n: 'PCV เข็มกระตุ้น', d: 'ปอดอักเสบ เยื่อหุ้มสมองอักเสบ และติดเชื้อในกระแสเลือดจากเชื้อนิวโมคอคคัส', i: 'inj', se: 'pcv' };
+    if (/^PCV/.test(id)) return { n: 'PCV ครั้งที่ ' + n, d: 'ปอดอักเสบ เยื่อหุ้มสมองอักเสบ และติดเชื้อในกระแสเลือดจากเชื้อนิวโมคอคคัส', i: 'inj', se: 'pcv' };
+    if (/^MMR/.test(id)) return { n: 'MMR ครั้งที่ ' + n, d: 'หัด คางทูม หัดเยอรมัน', i: 'inj', se: 'mmr' };
+    if (/^LAJE/.test(id)) return { n: 'LAJE ครั้งที่ ' + n, d: 'ไข้สมองอักเสบเจอี', i: 'inj', se: 'je' };
+    return { n: id, d: '', i: 'inj', se: '' };
+  }
+
+  /* ---------- เลือกวันเกิด (พ.ศ.) ---------- */
+  var now = new Date(), be = now.getFullYear() + 543;
+  for (var d = 1; d <= 31; d++) $('dD').insertAdjacentHTML('beforeend', '<option>' + d + '</option>');
+  TH_M.forEach(function (m, i) { $('dM').insertAdjacentHTML('beforeend', '<option value="' + (i + 1) + '">' + m + '</option>'); });
+  for (var y = be; y >= be - 6; y--) $('dY').insertAdjacentHTML('beforeend', '<option value="' + y + '">' + y + '</option>');
+
+  google.script.run.withSuccessHandler(function (inf) {
+    INFO = inf;
+    $('facBadge').textContent = '🏥 ' + inf.facility + (inf.phone ? ' • โทร ' + inf.phone : '');
+    $('apDay').textContent = inf.apptDay;
+  }).withFailureHandler(function () { $('facBadge').textContent = '🏥 หน่วยบริการสาธารณสุข'; }).parentInfo();
+
+  $('go').onclick = function () {
+    $('err').textContent = '';
+    var dd = +$('dD').value, mm = +$('dM').value, yy = +$('dY').value;
+    if (!dd || !mm || !yy) { $('err').textContent = 'กรุณาเลือก วัน เดือน ปี เกิดให้ครบ'; return; }
+    var ce = yy - 543, dt = new Date(ce, mm - 1, dd);
+    if (dt.getMonth() !== mm - 1) { $('err').textContent = 'วันที่ไม่ถูกต้อง (เดือนนี้ไม่มีวันที่ ' + dd + ')'; return; }
+    var dob = ce + '-' + String(mm).padStart(2, '0') + '-' + String(dd).padStart(2, '0');
+    $('go').disabled = true; $('go').textContent = 'กำลังคำนวณ…';
+    google.script.run.withSuccessHandler(function (r) {
+      $('go').disabled = false; $('go').textContent = 'ดูตารางนัดวัคซีน 💉';
+      LAST = r; render(r);
+    }).withFailureHandler(function (e) {
+      $('go').disabled = false; $('go').textContent = 'ดูตารางนัดวัคซีน 💉';
+      $('err').textContent = e.message || 'เกิดข้อผิดพลาด ลองใหม่อีกครั้ง';
+    }).parentSchedule(dob);
+  };
+
+  function render(r) {
+    var t = today(), nextRow = null;
+    r.rows.forEach(function (row) { if (!nextRow && row.date >= t) nextRow = row; });
+    $('formCard').classList.add('hidden'); $('result').classList.remove('hidden');
+    $('ageText').innerHTML = 'ลูกอายุ <b>' + esc(r.ageText) + '</b>';
+    if (nextRow) {
+      var days = Math.round((new Date(nextRow.date) - new Date(t)) / 86400000);
+      $('nextBox').innerHTML = '<svg class="sp" viewBox="0 0 48 48"><path d="M24 4 L40 10 V24 C40 34 33 41 24 44 C15 41 8 34 8 24 V10Z" fill="#fff"/></svg>' +
+        '<div class="k">📌 นัดฉีดวัคซีนครั้งถัดไป (อายุ ' + esc(nextRow.age) + ')</div>' +
+        '<div class="d">วัน' + esc(nextRow.weekday) + 'ที่ ' + esc(nextRow.dateTh) + '</div>' +
+        '<span class="cd">' + (days === 0 ? 'วันนี้' : 'อีก ' + days + ' วัน') + '</span>' +
+        '<div class="v">' + nextRow.vaccines.map(function (v) { return '<span>' + esc(vax(v).n) + '</span>'; }).join('') + '</div>' +
+        '<div class="pl">' + (INFO && INFO.time ? '⏰ ' + esc(INFO.time) + '<br>' : '') + '📍 ' + esc(INFO ? INFO.place : '') + (INFO && INFO.phone ? ' • ☎ ' + esc(INFO.phone) : '') + '<br>📒 อย่าลืมนำสมุดบันทึกสุขภาพแม่และเด็กมาด้วยทุกครั้ง</div>';
+    } else {
+      $('nextBox').innerHTML = '<div class="k">🎉 ตามตารางมาตรฐาน ลูกผ่านช่วงวัคซีนพื้นฐาน 2 เดือน – 4 ปีแล้ว</div><div class="pl">กรุณาตรวจสอบสมุดสีชมพูว่าได้รับครบทุกเข็ม ถ้าขาดเข็มใด ติดต่อหน่วยบริการเพื่อฉีดเก็บตกได้</div>';
+    }
+    $('timeline').innerHTML = r.rows.map(function (row) {
+      var cls = row === nextRow ? 'now' : (row.date < t ? 'past' : '');
+      var chip = row === nextRow ? '<span class="chip c-now">⭐ ครั้งถัดไป</span>' : (row.date < t ? '<span class="chip c-past">ผ่านมาแล้ว • ตรวจสอบในสมุดสีชมพู</span>' : '<span class="chip c-fut">นัดล่วงหน้า</span>');
+      return '<div class="st ' + cls + '"><div class="h"><span class="a">อายุ ' + esc(row.age) + '</span>' + chip + '</div>' +
+        '<div class="dt">🗓 วัน' + esc(row.weekday) + 'ที่ ' + esc(row.dateTh) + '</div>' +
+        row.vaccines.map(function (v) {
+          var x = vax(v);
+          return '<div class="vx"><div class="i" style="background:' + BG[x.i] + '">' + IC[x.i] + '</div><div><b>' + esc(x.n) + '</b><small>ป้องกัน: ' + esc(x.d) + '</small>' +
+            (row === nextRow && SE[x.se] ? '<span class="se">อาจพบ: ' + esc(SE[x.se]) + '</span>' : '') + '</div></div>';
+        }).join('') + '</div>';
+    }).join('') || '<div class="ref">ไม่พบตารางนัด</div>';
+    $('timeline').insertAdjacentHTML('beforeend', '<div class="ref" style="margin:6px 0 0">💡 อาการข้างเคียงของวัคซีนทุกชนิด ดูได้ที่แท็บ "อาการข้างเคียง" ด้านล่าง</div>');
+    $('timeline').insertAdjacentHTML('beforeend', '<div class="ref" style="margin:6px 0 0">* วัคซีน PCV ฟรีตามสิทธิ สปสช. สำหรับเด็กไทยที่เกิดตั้งแต่ 1 ตุลาคม 2568 เริ่มให้บริการ 1 ตุลาคม 2569 ฉีด 2, 4 และ 12 เดือน พร้อมวัคซีนตามนัดเดิม' +
+      (r.pcvEligible ? ' • ถ้าพลาดนัด มาฉีดต่อได้เลย ไม่ต้องเริ่มใหม่ (ต้องเริ่มก่อนอายุครบ 2 ปี)' : '') + '</div>');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('again').onclick = function () { $('result').classList.add('hidden'); $('formCard').classList.remove('hidden'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  $('prt').onclick = function () { window.print(); };
+  /* ---------- แบบบันทึกสุขภาพเด็กแรกเกิด–5 ปี (A4) — ใส่วันนัดตามค่าระบบ ช่องอื่นเว้นว่างให้เขียน ---------- */
+  var BK_LABEL = { HB1: 'HB1', BCG: 'BCG', HB2: 'HB2', DTP1: 'DTP-HB-Hib1', DTP2: 'DTP-HB-Hib2', DTP3: 'DTP-HB-Hib3', IPV1: 'IPV1', IPV2: 'IPV2',
+    ROTA1: 'Rota1', ROTA2: 'Rota2', ROTA3: 'Rota3', PCV1: 'PCV1', PCV2: 'PCV2', PCV3: 'PCV3', OPV1: 'OPV1', OPV2: 'OPV2', OPV3: 'OPV3',
+    MMR1: 'MMR1', MMR2: 'MMR2', LAJE1: 'LAJE1', LAJE2: 'LAJE2', DTP4: 'DTP4', DTP5: 'DTP5', HPV1: 'HPV1, HPV2', DT_P6: 'dT' };
+  var TM = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+  function bkD(s) { if (!s) return ''; var m = String(s).split('-'); return m[2] + '/' + m[1] + '/' + (+m[0] + 543); }
+  function bkForm(r) {
+    var b = r.dob.split('-'), blank = function (w) { return '<u class="bk-u" style="--w:' + w + 'px"></u>'; };
+    var vac = r.card.map(function (row) {
+      var n = row.vaccines.length, ds = row.dates || [], same = ds.every(function (x) { return x === ds[0]; });
+      return row.vaccines.map(function (v, i) {
+        return '<tr class="bk-vr">' + (i === 0 ? '<td class="bk-a" rowspan="' + n + '">' + esc(row.age) + '</td>' : '') +
+          '<td>' + esc(BK_LABEL[v] || v) + (row.note && i === 0 ? '<br><span class="bk-nt">(' + esc(row.note) + ')</span>' : '') + '</td>' +
+          (same ? (i === 0 ? '<td class="bk-d" rowspan="' + n + '">' + (row.school ? '<span class="bk-nt">ฉีดที่โรงเรียน</span>' : bkD(row.date)) + '</td>' : '')
+                : '<td class="bk-d">' + bkD(ds[i]) + '</td>') +
+          '<td></td></tr>';
+      }).join('');
+    }).join('');
+    var dspm = r.dspm.map(function (x) { return '<tr><td class="bk-a">' + x.months + ' เดือน</td><td class="bk-d">' + bkD(x.date) + '</td></tr>'; }).join('');
+    var iron = '<tr><th>ครั้งที่</th><th>วันที่รับ</th></tr>' + [1, 2, 3, 4, 5, 6, 7].map(function (i) { return '<tr><td class="bk-a">' + i + '</td><td></td></tr>'; }).join('');
+    var nut = ''; for (var i = 0; i < 34; i++) nut += '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+    return '<div class="bk-t">บันทึกสุขภาพเด็กแรกเกิด - 5 ปี<span class="bk-hn">HN ' + blank(90) + '</span></div>' +
+      '<div class="bk-ln"><span>ชื่อ-สกุล ' + blank(220) + '</span><span>บ้านเลขที่ ' + blank(50) + '</span><span>หมู่ที่ ' + blank(30) + '</span><span>บ้าน ' + blank(110) + '</span><span>ต. ' + blank(90) + '</span></div>' +
+      '<div class="bk-ln"><span>เกิดวันที่ <b>' + (+b[2]) + '</b></span><span>เดือน <b>' + TM[+b[1] - 1] + '</b></span><span>พ.ศ. <b>' + (+b[0] + 543) + '</b></span>' +
+      '<span>ชื่อมารดา ' + blank(180) + '</span><span>ชื่อบิดา ' + blank(180) + '</span></div>' +
+      '<div class="bk-ln"><span>น้ำหนักแรกเกิด ' + blank(50) + ' กรัม</span><span>ความยาว ' + blank(40) + ' ซม.</span><span>รอบศีรษะ ' + blank(40) + ' ซม.</span><span>Apgar Score ' + blank(50) + '</span><span>เวลาเกิด ' + blank(60) + '</span></div>' +
+      '<div class="bk-cols">' +
+        '<div class="bk-c1"><div class="bk-sec">การสร้างเสริมภูมิคุ้มกันโรค</div><table><colgroup><col style="width:21%"><col style="width:27%"><col style="width:21%"><col style="width:31%"></colgroup>' +
+          '<tr><th>อายุ</th><th>รายการ</th><th>วันที่นัด</th><th>วันที่ได้รับ / Lot</th></tr>' + vac + '</table></div>' +
+        '<div class="bk-c2"><div class="bk-sec">พัฒนาการ</div><table><tr><th>DSPM<br><span class="bk-nt">9, 18, 30, 42, 60</span></th><th>วันที่นัด</th></tr>' + dspm + '</table>' +
+          '<div class="bk-sec tp">ยาเสริมธาตุเหล็ก</div><table>' + iron + '</table>' +
+          '<div class="bk-sec tp">บันทึกอื่น ๆ</div><div style="flex:1;min-height:90px"></div></div>' +
+        '<div class="bk-c3"><div class="bk-sec">ภาวะโภชนาการของเด็กอายุ 0 - 60 เดือน</div><table><colgroup><col style="width:19%"><col style="width:11%"><col style="width:13%"><col style="width:13%"><col style="width:13%"><col style="width:17%"><col style="width:14%"></colgroup>' +
+          '<tr><th>ว.ด.ป.<br>ที่ชั่ง</th><th>อายุ</th><th>น้ำหนัก<br>(กก.)</th><th>ส่วนสูง<br>(ซม.)</th><th>รอบศีรษะ<br>(ซม.)</th><th>ภาวะ<br>โภชนาการ</th><th>ฟันขึ้น/<br>ฟันผุ</th></tr>' + nut + '</table></div>' +
+      '</div>' +
+      '<div class="bk-ft"><span>โรคประจำตัว ' + blank(330) + '</span><span>ผู้บันทึก ' + blank(140) + '</span></div>' +
+      '<div class="bk-src">วันนัดคำนวณจากวันเกิดตามกำหนดการสร้างเสริมภูมิคุ้มกันโรค กรมควบคุมโรค • นัดฉีดวัคซีนทุกวันที่ ' + esc(r.apptDay || '20') + ' ของเดือน (ตรงวันหยุดเลื่อนเป็นวันทำการถัดไป) • DSPM นัดตามวันครบอายุ • ' +
+        esc(r.facility || (INFO && INFO.facility) || '') + ' • พิมพ์เมื่อ ' + bkD(today()) + '</div>';
+  }
+  $('prtBk').onclick = function () {
+    if (!LAST || !LAST.card) { alert('กรุณากดดูตารางนัดวัคซีนอีกครั้ง'); return; }
+    $('bk').innerHTML = bkForm(LAST);
+    document.body.classList.add('print-bk');
+    setTimeout(function () { window.print(); }, 50);
+  };
+  window.addEventListener('afterprint', function () { document.body.classList.remove('print-bk'); });
+
+
+  /* ---------- บันทึกลงปฏิทิน (.ics) — เฉพาะวันนัดที่ยังไม่ถึง ---------- */
+  $('ics').onclick = function () {
+    if (!LAST) return;
+    var t = today(), place = INFO ? INFO.place : '', time = INFO ? INFO.time : '';
+    var ev = LAST.rows.filter(function (r) { return r.date >= t; }).map(function (r, i) {
+      var d = r.date.replace(/-/g, ''), nx = new Date(r.date); nx.setDate(nx.getDate() + 1);
+      var d2 = nx.getFullYear() + String(nx.getMonth() + 1).padStart(2, '0') + String(nx.getDate()).padStart(2, '0');
+      var desc = 'วัคซีน: ' + r.vaccines.map(function (v) { return vax(v).n; }).join(', ') + '\\nเวลา ' + time + '\\nนำสมุดบันทึกสุขภาพแม่และเด็กมาด้วย';
+      return ['BEGIN:VEVENT', 'UID:epi-' + d + '-' + i + '@vaccine', 'DTSTAMP:' + d + 'T000000Z', 'DTSTART;VALUE=DATE:' + d, 'DTEND;VALUE=DATE:' + d2,
+        'SUMMARY:นัดฉีดวัคซีนลูก (อายุ ' + r.age + ')', 'LOCATION:' + place, 'DESCRIPTION:' + desc,
+        'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:พรุ่งนี้มีนัดฉีดวัคซีนลูก', 'END:VALARM', 'END:VEVENT'].join('\r\n');
+    });
+    if (!ev.length) { alert('ไม่มีวันนัดที่ยังไม่ถึง'); return; }
+    var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//EPI Parent//TH', 'CALSCALE:GREGORIAN'].concat(ev).concat(['END:VCALENDAR']).join('\r\n');
+    var a = document.createElement('a');
+    a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+    a.download = 'นัดวัคซีนลูก.ics'; a.target = '_blank';
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+
+  /* ---------- สื่อความรู้ ---------- */
+  function tip(e, bg, h, p) { return '<div class="tip"><div class="e" style="background:' + bg + '">' + e + '</div><div><b>' + h + '</b><div style="color:#475569;font-size:14.5px">' + p + '</div></div></div>'; }
+  var K = {
+    before: tip('📒', '#fce7f3', 'นำสมุดบันทึกสุขภาพแม่และเด็ก (สมุดสีชมพู) มาทุกครั้ง', 'เจ้าหน้าที่จะตรวจประวัติวัคซีนและบันทึกวันนัดครั้งต่อไปให้') +
+      tip('🌡️', '#fef3c7', 'ถ้าลูกมีไข้หรือไม่สบาย แจ้งเจ้าหน้าที่ก่อนฉีด', 'กรณีมีไข้ ควรเลื่อนการรับวัคซีนออกไปก่อน เมื่อหายดีแล้วมาฉีดได้ทันที ไม่ต้องเริ่มนับใหม่') +
+      tip('⚠️', '#fee2e2', 'แจ้งอาการผิดปกติหลังฉีดครั้งก่อน และประวัติแพ้', 'เช่น เคยมีไข้สูง ชัก ผื่น หรือแพ้รุนแรงหลังฉีดวัคซีนครั้งก่อน') +
+      tip('🩺', '#e0f2fe', 'แจ้งโรคประจำตัวหรือยาที่ลูกใช้อยู่', 'โดยเฉพาะโรคหรือยาที่ทำให้ภูมิคุ้มกันต่ำ เพราะวัคซีนบางชนิดเป็นเชื้อเป็นอ่อนฤทธิ์ เช่น MMR, LAJE, OPV และโรต้า') +
+      tip('👕', '#dcfce7', 'แต่งตัวลูกด้วยเสื้อผ้าหลวม สะดวก', 'เปิดต้นขาหรือต้นแขนได้ง่าย เตรียมนม ผ้าอ้อม และของเล่นชิ้นโปรดไว้ปลอบลูก') +
+      tip('⏰', '#ede9fe', 'มาตามวันนัด', 'ฉีดตรงตามกำหนดจะทำให้ลูกมีภูมิคุ้มกันเร็วที่สุด ถ้ามาไม่ได้ ให้ติดต่อสถานบริการสาธารณสุขใกล้บ้านโดยเร็วที่สุด'),
+    after: tip('⏱️', '#e0f2fe', 'พักสังเกตอาการ 30 นาทีที่หน่วยบริการ', 'จากนั้นสังเกตอาการต่อที่บ้าน') +
+      tip('🧊', '#ccfbf1', 'ปวด บวม แดงบริเวณที่ฉีด', 'ประคบด้วยผ้าชุบน้ำเย็น ไม่ควรนวดหรือกดบริเวณที่ฉีด') +
+      tip('💊', '#fef3c7', 'ถ้ามีไข้', 'เช็ดตัวลดไข้ ให้ดื่มนมหรือน้ำบ่อย ๆ และให้ยาลดไข้ตามขนาดที่เจ้าหน้าที่แนะนำ') +
+      tip('🤱', '#fce7f3', 'ให้นมและกอดปลอบลูกตามปกติ', 'ลูกอาจงอแงกว่าปกติ 1–2 วัน ซึ่งเป็นอาการที่พบได้') +
+      tip('📝', '#ede9fe', 'ถ้ามีอาการข้างเคียง แจ้งเจ้าหน้าที่ก่อนรับวัคซีนครั้งต่อไป', 'และเก็บสมุดบันทึกการรับวัคซีนของลูกไว้ตลอดไป'),
+    se: Object.keys({ dtp: 1, ipv: 1, opv: 1, rota: 1, pcv: 1, mmr: 1, je: 1 }).map(function (k) {
+      var nm = { dtp: ['💉', 'DTP-HB-Hib / DTP (คอตีบ-บาดทะยัก-ไอกรน)'], ipv: ['💉', 'IPV (โปลิโอชนิดฉีด)'], opv: ['💧', 'OPV (โปลิโอชนิดหยอด)'], rota: ['💧', 'Rota (โรต้า ชนิดหยอด)'], pcv: ['💉', 'PCV (นิวโมคอคคัส)'], mmr: ['💉', 'MMR (หัด-คางทูม-หัดเยอรมัน)'], je: ['💉', 'LAJE (ไข้สมองอักเสบเจอี)'] }[k];
+      return tip(nm[0], '#fff7ed', nm[1], SE[k]);
+    }).join('') + '<div class="ref" style="margin-top:8px">อาการส่วนใหญ่ไม่รุนแรงและหายได้เอง ประโยชน์ของวัคซีนในการป้องกันโรครุนแรงมีมากกว่าความเสี่ยง</div>',
+    sos: function () { return '<div class="sev"><h3>🚨 รีบพาไปโรงพยาบาลทันที หรือโทร 1669 ถ้ามีอาการเหล่านี้</h3><ul style="margin:8px 0 0;padding-left:20px">' +
+      '<li>ผื่นขึ้นทั้งตัว หน้าบวม ปากบวม คอบวม</li><li>หายใจลำบาก หายใจมีเสียงวี้ด</li><li>ใจสั่น วิงเวียน อ่อนแรง ซึมมาก ปลุกไม่ค่อยตื่น</li>' +
+      '<li>ชัก หรือไข้สูงที่เช็ดตัวและกินยาแล้วไม่ลด</li><li>หลังหยอดวัคซีนโรต้า: ร้องไห้งอตัวเป็นพัก ๆ อาเจียนบ่อย หรือถ่ายมีมูกเลือด</li>' +
+      '<li>บริเวณที่ฉีดบวมแดงมากขึ้นเรื่อย ๆ เกิน 2–3 วัน</li></ul>' +
+      '<a class="call" href="tel:1669">📞 โทร 1669</a>' + (INFO && INFO.phone ? ' <a class="call" style="background:#0f766e" href="tel:' + esc(INFO.phone) + '">☎ ' + esc(INFO.facility) + '</a>' : '') + '</div>'; }
+  };
+  function showK(t) { $('kBody').innerHTML = typeof K[t] === 'function' ? K[t]() : K[t]; }
+  $('kTabs').querySelectorAll('button').forEach(function (b) {
+    b.onclick = function () { $('kTabs').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); }); showK(b.dataset.t); };
+  });
+  showK('before');
+})();
+</script>
+<div id="bk"></div>
+</body>
+</html>
