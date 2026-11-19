@@ -217,7 +217,7 @@ var VX_CONFIG = {
   OFF_WEEKDAYS: '0,6',                               // วันปิดทำการ 0 = อาทิตย์ … 6 = เสาร์
   ROTA_DEFAULT_DOSES: '3',                           // Rota ที่ใช้: 3 = Rotasiil (2-4-6 เดือน) / 2 = Rotarix
   ROTA_3DOSE_FROM: '2025-10-01',                     // วันเริ่มใช้ Rota ชนิด 3 ครั้ง (ค.ศ.)
-  PCV_BORN_FROM: '2025-10-01',                       // PCV: สิทธิ สปสช. เด็กที่เกิดตั้งแต่ (ค.ศ.)
+  PCV_BORN_FROM: '2025-10-01',                       // PCV: สิทธิ สปสช. เด็กที่เกิดตั้งแต่ (ค.ศ.) • ว่าง = ใช้เฉพาะเกณฑ์อายุ ≤ 2 ปี
   PCV_START: '2026-10-01'                            // PCV: วันเริ่มให้บริการ (ค.ศ.)
 };
 /* วันหยุดราชการ (ค.ศ. yyyy-mm-dd) — เฉพาะวันจันทร์–ศุกร์ • อัปเดตทุกปีเมื่อ ครม. ประกาศ
@@ -304,9 +304,9 @@ var DEFAULT_RULES = [
   ['ROTA2','ROTA', 'โรต้า (Rota)', 2, 'Rota2', 'CHILD', '4m', '10w', '32w1d', '4w', '', '', '', 'Y', '', 'ห้ามให้ครั้งสุดท้ายหลังอายุ 32 สัปดาห์', 'ROTA'],
   ['ROTA3','ROTA', 'โรต้า (Rota)', 3, 'Rota3', 'CHILD', '6m', '14w', '32w1d', '4w', '', 'ROTA_3DOSE', '', 'Y', '', 'Rotasill ให้ 3 ครั้ง (R21-R23) / Rotarix 2 ครั้ง (R11-R12) = ครบ / R11 + Rotasill 2 ครั้ง = ครบ', 'ROTA'],
   // PCV10 (Pneumosil) — คำนวณด้วย ePcvSeries_ ตามคู่มือ PCV สสจ.อุบลราชธานี 2569 (2p+1, catch-up ตามอายุที่เริ่ม) — ค่าในแถวนี้ใช้แสดงผลเท่านั้น
-  ['PCV1', 'PCV',  'นิวโมคอคคัส (PCV)', 1, 'PCV1', 'CHILD', '2m', '6w', '24m', '', '', '', '', 'Y', 'P11', 'สูตร 2p+1 (2-4-12 เดือน) • เริ่มก่อนอายุ 2 ปี • สิทธิ สปสช. เด็กเกิดตั้งแต่ 1 ต.ค. 2568', 'PCV5|PCV'],
-  ['PCV2', 'PCV',  'นิวโมคอคคัส (PCV)', 2, 'PCV2', 'CHILD', '4m', '10w', '', '4w', '8w', '', '', 'Y', 'P12', 'ห่างเข็ม 1 ≥ 4 สัปดาห์ (เริ่มอายุ ≥ 12 เดือน: ≥ 8 สัปดาห์)', 'PCV5|PCV'],
-  ['PCV3', 'PCV',  'นิวโมคอคคัส (PCV)', 3, 'PCV3 (กระตุ้น)', 'CHILD', '12m', '9m', '', '8w', '', '', '', 'Y', 'P14', 'เข็มกระตุ้นอายุ 12 เดือน ห่างเข็ม 2 ≥ 8 สัปดาห์ • ถ้าเริ่มเมื่ออายุ ≥ 12 เดือน ไม่ต้องให้', 'PCV5|PCV'],
+  ['PCV1', 'PCV',  'นิวโมคอคคัส (PCV)', 1, 'PCV1', 'CHILD', '2m', '6w', '24m', '', '', '', '', 'Y', 'P11', 'สูตร 2p+1 (2-4-12 เดือน) ฉีดพร้อมวัคซีนตามนัดเดิม • อายุต่ำสุด 6 สัปดาห์ • สิทธิ สปสช. เด็กเกิดตั้งแต่ 1 ต.ค. 2568 เริ่มก่อนอายุครบ 2 ปี', 'PCV5|PCV'],
+  ['PCV2', 'PCV',  'นิวโมคอคคัส (PCV)', 2, 'PCV2', 'CHILD', '4m', '10w', '', '4w', '8w', '', '', 'Y', 'P12', 'อายุ 4 เดือน ห่างเข็ม 1 แนะนำ ≥ 8 สัปดาห์ (จำเป็นขั้นต่ำ ≥ 4 สัปดาห์) • เริ่มอายุ ≥ 12 เดือน: ≥ 8 สัปดาห์', 'PCV5|PCV'],
+  ['PCV3', 'PCV',  'นิวโมคอคคัส (PCV)', 3, 'PCV3 (กระตุ้น)', 'CHILD', '12m', '9m', '', '8w', '', '', '', 'Y', 'P14', 'อายุ 12 เดือนพร้อม LAJE1 (ให้ได้ 9–18 เดือน แนะนำ 12–15 เดือน) ห่างเข็ม 2 ≥ 8 สัปดาห์ • เริ่มอายุ ≥ 12 เดือน ไม่ต้องให้', 'PCV5|PCV'],
   ['MMR1', 'MMR',  'หัด-คางทูม-หัดเยอรมัน (MMR)', 1, 'MMR1', 'CHILD', '9m', '9m', '', '', '', '', '', 'Y', '', '', 'MMR'],
   ['MMR2', 'MMR',  'หัด-คางทูม-หัดเยอรมัน (MMR)', 2, 'MMR2', 'CHILD', '18m', '12m', '', '4w', '', '', '', 'Y', '', '', 'MMR'],
   ['LAJE1','LAJE', 'ไข้สมองอักเสบเจอี (LAJE)', 1, 'LAJE1', 'CHILD', '12m', '12m', '', '', '', '', '', 'Y', '', '', 'LAJE|JEK'],
@@ -562,7 +562,8 @@ function baseItem_(r) {
 }
 
 /* ---------------- PCV10 (Pneumosil) ตามคู่มือปฏิบัติงานวัคซีน PCV สำหรับหน่วยบริการปฐมภูมิ (สสจ.อุบลราชธานี 2569) ----------------
- *  - เริ่มให้บริการ PCV_START (1 ต.ค. 2569) • สิทธิ สปสช.: เด็กไทยที่เกิดตั้งแต่ PCV_BORN_FROM (1 ต.ค. 2568)
+ *  - เริ่มให้บริการ PCV_START (1 ต.ค. 2569) • สิทธิ สปสช.: เด็กไทยที่เกิดตั้งแต่ PCV_BORN_FROM (1 ต.ค. 2568) และเริ่มเข็มแรกก่อนอายุครบ 2 ปี
+ *  - ตารางค้นหาตามอายุที่เริ่มรับ PCV ครั้งแรก (catch-up) + นัดพร้อมวัคซีนตามวัยเดิมเพื่อลดจำนวนครั้งที่มา แต่ไม่ทำให้ PCV ล่าช้า
  *  - มาตรฐาน 2p+1: 2, 4, 12 เดือน • มาช้าไม่เริ่มชุดใหม่ ดูอายุตอนได้เข็มแรก
  *  - เริ่มก่อน 12 เดือน = 3 เข็ม (เข็ม 2 ห่าง ≥ 4 สัปดาห์, กระตุ้นอายุ 12 เดือน ห่างเข็ม 2 ≥ 8 สัปดาห์)
  *  - เริ่ม 12–23 เดือน = 2 เข็ม ห่าง ≥ 8 สัปดาห์ ไม่ต้องกระตุ้น • เริ่มเมื่ออายุ ≥ 24 เดือน อยู่นอกอายุที่วัคซีนรับรอง
@@ -576,14 +577,62 @@ function ePcvDone_(recs, dobStr) {
   return { n: g.length, startM: startM, need: need, complete: g.length >= need };
 }
 function ePcvSeries_(list, c, recs, dob, today, ctx, out, grace) {
-  var s = c.settings || {}, start = eParse_(String(s.PCV_START || '2026-10-01')), bornFrom = eParse_(String(s.PCV_BORN_FROM || '2025-10-01'));
+  var s = c.settings || {}, start = eParse_(String(s.PCV_START || '2026-10-01')), bornFrom = s.PCV_BORN_FROM ? eParse_(String(s.PCV_BORN_FROM)) : null;
   var given = recs.filter(function (r) { return r.series === 'PCV'; }).sort(function (a, b) { return String(a.dateGiven).localeCompare(String(b.dateGiven)); });
-  var rows = list.slice(0, 3);
-  if (!given.length && !(dob >= bornFrom)) {
-    rows.forEach(function (r) { var it = baseItem_(r); it.status = 'NA'; it.note = 'สิทธิ สปสช. สำหรับเด็กที่เกิดตั้งแต่ ' + eFmt_(bornFrom); out.items.push(it); });
-    return;
-  }
-  var prev = null, startM = null, need = 3, pendingFound = false, stop = false;
+  var rows = list.slice(0, 3), A = function (o) { return eAddOffset_(dob, o); }, F = eFmt_;
+  var OUT_PLAN = 'อายุ ≥ 24 เดือน ยังไม่เคยได้ PCV — นอกอายุที่ Pneumosil รับรอง (นอกแผนงาน) • หากผู้ปกครองต้องการ แนะนำวัคซีนทางเลือก: PCV13/15/20 ฉีด 1 โดส หรือ PCV10 (Synflorix) 2 โดส ห่างกัน ≥ 8 สัปดาห์';
+  var allNA = function (note) { rows.forEach(function (r) { var it = baseItem_(r); it.status = 'NA'; it.note = note; out.items.push(it); }); };
+  if (!given.length && bornFrom && !(dob >= bornFrom)) return allNA('สิทธิ สปสช.: เด็กไทยที่เกิดตั้งแต่ ' + F(bornFrom) + ' (ค่าระบบ PCV_BORN_FROM)');
+  if (!given.length && A('24m') <= start) return allNA(OUT_PLAN);
+  if (!given.length && !c.parentMode && today >= A('24m')) return allNA(OUT_PLAN);
+
+  // วันที่มีวัคซีนตามวัยอื่นนัดอยู่แล้ว (PCV คำนวณหลังสุด)
+  var visits = [], apEx = eApptExclude_(s);
+  out.items.forEach(function (x) {
+    if (x.series === 'PCV' || apEx[x.ruleId] || !x.apptDate || x.group !== 'CHILD' || ['DUE', 'OVERDUE', 'UPCOMING', 'PLANNED'].indexOf(x.status) < 0) return;
+    if (visits.indexOf(x.apptDate) < 0) visits.push(x.apptDate);
+  });
+  visits.sort();
+  var isVisit = function (d) { return !!d && visits.indexOf(F(d)) >= 0; };
+  var sess = function (d) { return eApptFor_(d, d, null, today, ctx).date; };            // รอบนัดแรกที่ ≥ d
+  var visitsIn = function (lo, hi) { var a = F(eMax_(lo, today)), b = F(hi); return visits.filter(function (v) { return v >= a && v <= b; }).map(eParse_); };
+  var best = function (cands, key) {                                    // มาเพิ่มน้อยที่สุด → เร็วที่สุด
+    return cands.filter(Boolean).sort(function (x, y) { var kx = key(x), ky = key(y); return kx[0] - ky[0] || kx[1] - ky[1] || kx[2] - ky[2]; })[0];
+  };
+
+  // ---- แผนเข็มกระตุ้น (เริ่มก่อน 12 เดือน) ----
+  //   อายุต่ำสุด 9 เดือน (เริ่ม 7–11 เดือน: 12–15 เดือน) • ห่างเข็ม 2 ≥ 8 สัปดาห์ • แนะนำ 12 เดือนพร้อม LAJE1
+  //   ** หรือพร้อมวัคซีนอายุ 18 เดือน (DTP4, MMR2, OPV2)
+  var boosterPlan = function (d2, startM) {
+    var bMin = eMax_(eMax_(A(startM >= 7 ? '12m' : '9m'), eAddOffset_(d2, '8w')), start);
+    var bRec = eMax_(eMax_(A('12m'), eAddOffset_(d2, '8w')), start);
+    var c = [sess(bRec)].concat(visitsIn(bRec, eMax_(A('15m'), bRec)));
+    var late = bRec > A('15m');                                           // ช่วงแนะนำ 12–15 เดือนผ่านไปแล้ว
+    var at18 = visitsIn(eMax_(bMin, A('18m')), A('19m'));
+    c = c.concat(at18);
+    // นัดพร้อมวัคซีน 18 เดือนได้ แต่ถ้ายังทันช่วง 12–15 เดือน ถือว่าล่าช้า (นับเท่ามาเพิ่ม 1 ครั้ง)
+    var cost = function (d) { if (at18.some(function (v) { return +v === +d; }) && !late) return 1; return isVisit(d) ? 0 : 1; };
+    var b = best(c, function (d) { return [cost(d), +d, 0]; });
+    b.__cost = cost(b);
+    return { earliest: bMin, due: bRec, date: b };
+  };
+  // ---- แผนเข็ม 2 ----
+  var dose2Plan = function (d1, startM, need) {
+    if (need === 2) {                                                   // เริ่ม 12–23 เดือน: ห่าง ≥ 8 สัปดาห์ (15–16 เดือน: หรือพร้อมวัคซีน 18 เดือน)
+      var e = eMax_(eAddOffset_(d1, '8w'), start);
+      var d = best([sess(e)].concat(visitsIn(e, eAddOffset_(e, '6w'))), function (x) { return [isVisit(x) ? 0 : 1, +x, 0]; });
+      return { earliest: e, due: e, date: d };
+    }
+    // เริ่มก่อน 12 เดือน: ขั้นต่ำ ≥ 4 สัปดาห์ (แนะนำ 8 สัปดาห์ถ้าเริ่มตามกำหนด 2 เดือน) หรือนัดพร้อมวัคซีนตามวัยถัดไป
+    var e2 = eMax_(eMax_(A('10w'), eAddOffset_(d1, '4w')), start);
+    var r2 = startM < 3 ? eMax_(A('4m'), eAddOffset_(d1, '8w')) : e2;
+    var hi = startM < 3 ? eAddOffset_(r2, '4w') : eAddOffset_(e2, '13w');
+    var c = [sess(r2)].concat(visitsIn(e2, hi));
+    var pick = best(c, function (x) { var b = boosterPlan(x, startM).date; return [(isVisit(x) ? 0 : 1) + b.__cost, +b, +x]; });
+    return { earliest: e2, due: r2, date: pick };
+  };
+
+  var startM = null, need = 3, prev = null, pendingFound = false, plan = {};
   rows.forEach(function (r, i) {
     var it = baseItem_(r), rec = given[i];
     if (rec) {
@@ -593,34 +642,28 @@ function ePcvSeries_(list, c, recs, dob, today, ctx, out, grace) {
       if (i === 0) { startM = eMonthsBetween_(dob, gd); need = startM >= 12 ? 2 : 3; }
       prev = gd; out.items.push(it); return;
     }
-    if (stop) { it.status = 'EXPIRED'; out.items.push(it); return; }
-    if (i >= need) { it.status = 'NA'; it.note = 'ไม่ต้องให้ — เริ่ม PCV เมื่ออายุ 12 เดือนขึ้นไป ฉีด 2 เข็มถือว่าครบ'; out.items.push(it); return; }
-    var earliest, due, maxIncl = null;
-    if (i === 0) {
-      earliest = eAddOffset_(dob, '6w'); due = eAddOffset_(dob, '2m');
-      maxIncl = eAddDays_(eAddOffset_(dob, '24m'), -1);
-    } else if (i === 1) {
-      if (need === 3) { earliest = eMax_(eAddOffset_(dob, '10w'), eAddOffset_(prev, '4w')); due = eMax_(eAddOffset_(dob, '4m'), eAddOffset_(prev, '4w')); }
-      else { earliest = eAddOffset_(prev, '8w'); due = earliest; }
-    } else {
-      earliest = eMax_(eAddOffset_(dob, startM != null && startM >= 7 ? '12m' : '9m'), eAddOffset_(prev, '8w'));
-      due = eMax_(eAddOffset_(dob, '12m'), eAddOffset_(prev, '8w'));
-    }
-    earliest = eMax_(earliest, start); due = eMax_(due, earliest);
-    it.earliest = eFmt_(earliest); it.dueDate = eFmt_(due); it.maxDate = maxIncl ? eFmt_(maxIncl) : '';
-    if (i === 0 && eMax_(earliest, today) > maxIncl) {
-      it.status = 'EXPIRED'; it.note = 'อายุเกิน 2 ปี — นอกอายุที่วัคซีน PCV10 (Pneumosil) รับรอง';
-      stop = true; out.items.push(it); return;
-    }
-    var ap = eApptFor_(earliest, due, maxIncl, today, ctx), projected = ap.date || eMax_(due, today);
+    if (i >= need) { it.status = 'NA'; it.note = 'ไม่ต้องให้ — เริ่ม PCV เมื่ออายุ 12–23 เดือน ฉีด 2 เข็มถือว่าครบ'; out.items.push(it); return; }
+    var p;
+    if (i === 0) {                                                       // เข็ม 1: อายุต่ำสุด 6 สัปดาห์ • มาช้าให้ทันทีเมื่อมารับบริการ
+      var e1 = eMax_(A('6w'), start), due1 = eMax_(A('2m'), start), max1 = eAddDays_(A('24m'), -1);
+      var ap1 = eApptFor_(e1, due1, max1, today, ctx);
+      if (!ap1.date && c.parentMode) return allNA('ไม่มีรอบนัดก่อนอายุครบ 2 ปี');
+      p = { earliest: e1, due: due1, date: ap1.date, maxD: max1, urgent: ap1.urgent };
+      startM = eMonthsBetween_(dob, ap1.date || eMax_(due1, today)); need = startM >= 12 ? 2 : 3;
+    } else if (i === 1) p = dose2Plan(prev, startM, need);
+    else p = boosterPlan(prev, startM);
+    it.earliest = F(p.earliest); it.dueDate = F(eMax_(p.due, p.earliest)); it.maxDate = p.maxD ? F(p.maxD) : '';
     if (!pendingFound) {
-      it.status = eStatus_(due, today, grace); it.canGiveNow = today >= earliest; it.isNextCandidate = true;
+      it.status = eStatus_(eMax_(p.due, p.earliest), today, grace); it.canGiveNow = today >= p.earliest; it.isNextCandidate = true;
       pendingFound = true;
     } else it.status = 'PLANNED';
-    it.apptDate = eFmt_(ap.date); it.apptUrgent = ap.urgent; it.apptRescued = ap.rescued;
-    if (i === 0) { startM = eMonthsBetween_(dob, projected); need = startM >= 12 ? 2 : 3; }
-    if (need === 2 && i === 0) it.note = 'เริ่มเมื่ออายุ ≥ 12 เดือน: ฉีด 2 เข็ม ห่างกัน ≥ 8 สัปดาห์';
-    prev = projected; out.items.push(it);
+    it.apptDate = F(p.date); it.apptUrgent = !!p.urgent;
+    var notes = [];
+    if (i === 0 && need === 2) notes.push('เริ่มเมื่ออายุ 12–23 เดือน: ฉีด 2 เข็ม ห่างกัน ≥ 8 สัปดาห์ ไม่ต้องให้เข็มกระตุ้น');
+    if (i > 0 && isVisit(p.date)) notes.push('นัดพร้อมวัคซีนตามวัย');
+    if (it.canGiveNow && it.status !== 'UPCOMING') notes.push('ครบระยะห่างขั้นต่ำแล้ว ฉีดได้ทันทีเมื่อมารับบริการ');
+    if (notes.length) it.note = notes.join(' • ');
+    prev = p.date || eMax_(p.due, today); out.items.push(it);
   });
 }
 
@@ -645,6 +688,8 @@ function computeSchedule_(ctx) {
     if (!seriesMap[r.series]) { seriesMap[r.series] = []; order.push(r.series); }
     seriesMap[r.series].push(r);
   });
+  // PCV คำนวณหลังสุด เพื่อนัดพร้อมวัคซีนตามวัยเดิม (ลดการมารับบริการเพิ่ม)
+  order.sort(function (a, b) { return (a === 'PCV') - (b === 'PCV'); });
 
   order.forEach(function (sk) {
     var list = seriesMap[sk].sort(function (a, b) { return (+a.doseNo) - (+b.doseNo); });
@@ -841,7 +886,8 @@ function eWv31Calc_(row, D, F, H, I) {
 function computeCoverage_(persons, recsByPerson, settings, todayStr) {
   var today = eParse_(todayStr);
   var mooList = String(settings.MOO_LIST || '').split(',').map(function (s) { return s.trim(); }).filter(String);
-  var pcvFrom = eParse_(String(settings.PCV_BORN_FROM || '2025-10-01'));
+  var pcvStart = eParse_(String(settings.PCV_START || '2026-10-01')), pcvFrom = settings.PCV_BORN_FROM ? eParse_(String(settings.PCV_BORN_FROM)) : null;
+  var pcvTarget = function (dobStr) { var d = eParse_(dobStr); return d && eAddOffset_(d, '24m') > pcvStart && (!pcvFrom || d >= pcvFrom); };
   return COVERAGE_DEF.map(function (def) {
     var cohort = persons.filter(function (p) {
       if (p.status !== 'ACTIVE') return false;
@@ -854,7 +900,7 @@ function computeCoverage_(persons, recsByPerson, settings, todayStr) {
       cohort.forEach(function (p) {
         var rs = (recsByPerson[p.personId] || []).filter(function (r) { return String(r.voided) !== 'Y'; });
         var has = function (id) { return rs.some(function (r) { return r.ruleId === id; }); };
-        if (key.indexOf('PCV') === 0 && !(eParse_(p.dob) >= pcvFrom)) return;
+        if (key.indexOf('PCV') === 0 && !pcvTarget(p.dob) && !rs.some(function (r) { return r.series === 'PCV'; })) return;
         den++;
         if (key === 'PCV2') { if (ePcvDone_(rs, p.dob).n >= 2) num++; }
         else if (key === 'PCV_FULL') { if (ePcvDone_(rs, p.dob).complete) num++; }
@@ -1045,8 +1091,8 @@ var google = { script: { run: (function () {
         }).join('') + '</div>';
     }).join('') || '<div class="ref">ไม่พบตารางนัด</div>';
     $('timeline').insertAdjacentHTML('beforeend', '<div class="ref" style="margin:6px 0 0">💡 อาการข้างเคียงของวัคซีนทุกชนิด ดูได้ที่แท็บ "อาการข้างเคียง" ด้านล่าง</div>');
-    $('timeline').insertAdjacentHTML('beforeend', '<div class="ref" style="margin:6px 0 0">* วัคซีน PCV ฟรีตามสิทธิ สปสช. สำหรับเด็กไทยที่เกิดตั้งแต่ 1 ตุลาคม 2568 เริ่มให้บริการ 1 ตุลาคม 2569 ฉีด 2, 4 และ 12 เดือน พร้อมวัคซีนตามนัดเดิม' +
-      (r.pcvEligible ? ' • ถ้าพลาดนัด มาฉีดต่อได้เลย ไม่ต้องเริ่มใหม่ (ต้องเริ่มก่อนอายุครบ 2 ปี)' : '') + '</div>');
+    $('timeline').insertAdjacentHTML('beforeend', '<div class="ref" style="margin:6px 0 0">* วัคซีน PCV ฟรีตามสิทธิ สปสช. สำหรับเด็กไทยที่เกิดตั้งแต่ 1 ตุลาคม 2568 เริ่มให้บริการ 1 ตุลาคม 2569 ฉีด 2, 4 และ 12 เดือน พร้อมวัคซีนตามนัดเดิม • เด็กที่ยังไม่เคยได้รับ ฉีดเก็บตกได้ถ้าอายุไม่เกิน 2 ปี' +
+      (r.pcvEligible ? ' • ถ้าพลาดนัด ให้ติดต่อสถานบริการสาธารณสุขใกล้บ้านโดยเร็วที่สุด' : ' • เด็กอายุ 2–5 ปีที่ยังไม่เคยได้ PCV อยู่นอกแผนงาน หากต้องการ ปรึกษาเจ้าหน้าที่เรื่องวัคซีนทางเลือก') + '</div>');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
